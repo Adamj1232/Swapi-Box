@@ -12,6 +12,7 @@ export default class App extends Component {
     this.state = {
       favorites: [],
       scroll: [],
+      data: {}
     }
   }
 
@@ -19,14 +20,20 @@ export default class App extends Component {
     fetch('http://swapi.co/api/films/')
       .then((response) => response.json())
       .then((data) => {
-        console.log(data )
+        this.setState({
+          data: {
+            crawl: data.results[0].opening_crawl,
+            title: data.results[0].title
+          }
       })
-  }
+  })
+}
+
 
   render() {
     return (
       <div className="App">
-        <Scroll />
+        <Scroll scrollData={this.state.data}/>
       </div>
     );
   }
