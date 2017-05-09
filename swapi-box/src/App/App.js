@@ -15,7 +15,7 @@ export default class App extends Component {
       favorites: [],
       scroll: [],
       peopleData: {},
-      filmData: {},
+      filmData: [],
       homeworld: []
     }
   }
@@ -24,7 +24,7 @@ export default class App extends Component {
     return fetch('http://swapi.co/api/films/')
     .then((response) => response.json())
     .then((data) => {
-      console.log(this.Cleaner.filmCleaner(data))
+      // console.log(this.Cleaner.filmCleaner(data))
       // return this.Cleaner.filmCleaner(data)
       return data
 
@@ -103,11 +103,11 @@ export default class App extends Component {
 
 
     Promise.all([films, p2]).then(values => {
-      console.log(values[0]);
+      // console.log(values[0]);
       this.setState({
         filmData: values[0].results
       })
-      console.log(this.state.filmData)
+      // console.log(this.state.filmData)
     });
   }
 
