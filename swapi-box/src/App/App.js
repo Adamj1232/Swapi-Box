@@ -14,56 +14,56 @@ export default class App extends Component {
     this.state = {
       favorites: [],
       scroll: [],
-      peopleData: {
-        peopleCleaner: {},
-        homeworld: {}
-      },
+      peopleData: [],
       filmData: {},
       homeworld: []
     }
   }
 
   getFilmData(){
-    fetch('http://swapi.co/api/films/')
+    return fetch('http://swapi.co/api/films/')
     .then((response) => response.json())
     .then((data) => {
-      this.setState({
-        filmData: this.Cleaner.filmCleaner(data)
-      })
+      return this.Cleaner.filmCleaner(data)
     })
   }
 
   getPeopleData(){
-    let worldArrr = []
-    fetch('http://swapi.co/api/people/')
+
+    return fetch('http://swapi.co/api/people/')
     .then((response) => response.json())
     .then((data) => {
-      this.setState({
-        peopleData: this.Cleaner.peopleCleaner(data)
-      })
       return this.Cleaner.peopleCleaner(data)
-    }).then((data2) => {
-      data2.forEach( person => {
-        fetch(person.homeworldAPI)
-       .then((response) => response.json())
-       .then((data) => {
-         worldArrr.push({name: data.name, pop:data.population})
-          this.setState({
-            homeworld: worldArrr
-          })
-          return worldArrr
-       })
-      })
+
     })
   }
 
-  getHomeworldData(api){ //put on page holding cards??
-     fetch(api)
-    .then((response) => response.json())
-    .then((data) => {
-      //  console.log(data.name)
-       return data
+  // .then((data2) => {
+  //   data2.peopleData.forEach( person => {
+  //     fetch(person.homeworldAPI)
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       worldArr.push({name: data.name, pop: data.population})
+  //       console.log(worldArr)
+  //       return worldObj.world = worldArr
+  //     })
+  //   })
+  // })
+
+  getHomeworldData(){
+    // console.log(this.state.peopleData)
+    let worldArr =[]
+    return this.state.peopleData.forEach( person => {
+        fetch(person.homeworldAPI)
+        .then((response) => response.json())
+        .then((data) => {
+          // console.log('homeworld    ' +  {name: data.name, pop: data.population})
+            this.state.homeworld.push({name: data.name, pop: data.population})
+
+        })
+        console.log(worldArr)
     })
+    // return worldArr
   }
 
   getPlanetsData(){
@@ -98,17 +98,36 @@ export default class App extends Component {
 
 
   componentWillMount(){
-    {this.getFilmData(),
-     this.getPeopleData()}
+    var films = this.getFilmData()
+    var p2 = this.getPeopleData()
+    // console.log( p2)
+    // console.log(this.getHomeworldData)
+
+
+    Promise.all([films, p2]).then(values => {
+      // console.log(values[1]);
+      this.setState({
+        filmData: values[0],
+        peopleData: values[1]
+      }).then(() =>{
+        this.getHomeworldData()
+      })
+        // Promise.all(p3).then((values2) => {
+        //   console.log(values2)
+        // })
+        // this.setState({
+        //   homeworld: this.getHomeworldData()
+        // })
+      })
   }
 
 
   render() {
     return (
       <div className="App">
-        <Scroll scrollData={this.state.filmData} personData={this.state.peopleData}/>
+        <Scroll scrollData={this.state.filmData}/>
 
       </div>
     );
   }
-}
+ }

@@ -11,7 +11,6 @@ export default class Cleaner {
 
   peopleCleaner(data){
     let peopleResults = data.results.map( person => {
-      console.log(person.homeworld)
       var results
       return results = {
         person: person.name,
