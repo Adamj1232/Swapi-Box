@@ -1,11 +1,12 @@
 import React from 'react'
 
 export const Scroll = ({scrollData}) => {
-  // console.log(data)
+  // console.log(scrollData)
   return(
-    <div>
-      <div>{scrollData.title}</div>
+    <section>
       <div>{scrollData.crawl}</div>
-    </div>
+      <h3>{scrollData.title}</h3>
+      <h4>{scrollData.date}</h4>
+    </section>
   )
 }
