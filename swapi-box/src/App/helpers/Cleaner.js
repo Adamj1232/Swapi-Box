@@ -12,29 +12,34 @@ export default class Cleaner {
   peopleCleaner(data){
     let peopleResults = data.results.map( person => {
       console.log(person.homeworld)
-
-        // this.getHomeworldData(person.homeworld)
-      return {
+      var results
+      return results = {
         person: person.name,
-        speciesAPI: person.species[0],
-        homeAPI: person.homeworld,
-        homeworld: this.getHomeworldData(person.homeworld)
+        homeworldAPI: person.homeworld,
+        homeworld: 'this.getHomeworldData(person.homeworld)'
       }
     })
     return peopleResults
   }
 
   getHomeworldData(api){ //put on page holding cards??
-    var homeWorlds = []
      fetch(api)
     .then((response) => response.json())
     .then((data) => {
-      // console.log(data.name)
-       homeWorlds.push({data: data.name, pop: data.population})
+       return {name: data.name,
+       pop: data.population}
        })
-    console.log(Object.values(homeWorlds))
-    return homeWorlds
-  // })
-}
+  }
+
+  getSpeciesData(api){ //put on page holding cards??
+    var species = {}
+     fetch(api)
+    .then((response) => response.json())
+    .then((data) => {
+       species.speciesName = data.name
+    })
+    return species
+  }
+
 
 }
