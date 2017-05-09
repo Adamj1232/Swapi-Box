@@ -14,7 +14,7 @@ export default class App extends Component {
     this.state = {
       favorites: [],
       scroll: [],
-      peopleData: {},
+      peopleData: [],
       filmData: {},
     }
   }
@@ -35,9 +35,28 @@ export default class App extends Component {
     .then((data) => {
       this.setState({
         peopleData: this.Cleaner.peopleCleaner(data)
+
       })
     })
   }
+
+//   getHomeworldData(){ //put on page holding cards??
+//     console.log(this.state.peopleData + 'peopleData')
+//     let worldInfo = this.state.peopleData.map( api => {
+//       console.log(api + "appppppi")
+//      fetch(api.homeAPI)
+//     .then((response) => response.json())
+//     .then((data) => {
+//         return { homeworld: data.name, population: data.population,}
+//        })
+//       // else {
+//       //   this.setState({ species: data.name, language: data.language,
+//       //  })
+//       // }
+//     })
+//     return this.state.homeworld.push(worldInfo)
+//   // })
+// }
 
   getPlanetsData(){
     fetch('http://swapi.co/api/planets/')
@@ -70,12 +89,17 @@ export default class App extends Component {
 
 
 
-  componentDidMount(){
+  componentWillMount(){
     {this.getFilmData(),
     this.getPeopleData(),
     this.getPlanetsData(),
     this.getVehicleData()}
   }
+  // componentDidMount(prevProps, prevState){
+  //   this.getHomeworldData()
+  // }
+
+
 
   render() {
     return (
