@@ -14,49 +14,44 @@ export default class App extends Component {
     this.state = {
       favorites: [],
       scroll: [],
-      peopleData: {
-        peopleCleaner: {},
-        homeworld: {}
-      },
+      peopleData: {},
       filmData: {},
       homeworld: []
     }
   }
 
   getFilmData(){
-    fetch('http://swapi.co/api/films/')
+    return fetch('http://swapi.co/api/films/')
     .then((response) => response.json())
     .then((data) => {
-      this.setState({
-        filmData: this.Cleaner.filmCleaner(data)
-      })
+      console.log(this.Cleaner.filmCleaner(data))
+      // return this.Cleaner.filmCleaner(data)
+      return data
+
     })
   }
 
   getPeopleData(){
-    let worldArrr = []
-    fetch('http://swapi.co/api/people/')
-    .then((response) => response.json())
-    .then((data) => {
-      this.setState({
-        peopleData: this.Cleaner.peopleCleaner(data)
-      })
-      return this.Cleaner.peopleCleaner(data)
-    }).then((data2) => {
-      data2.forEach( person => {
-        fetch(person.homeworldAPI)
-       .then((response) => response.json())
-       .then((data) => {
-         worldArrr.push({name: data.name, pop:data.population})
-          this.setState({
-            homeworld: worldArrr
-          })
-          return worldArrr
-       })
-      })
-    })
-  }
+  //  let worldObj = {}
+  //  let worldArr = []
+   return fetch('http://swapi.co/api/people/')
+   .then((response) => response.json())
+   .then((data) => {
+     return this.Cleaner.peopleCleaner(data)
 
+   })
+  //  .then((data2) => {
+  //    data2.peopleData.forEach( person => {
+  //      fetch(person.homeworldAPI)
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       worldArr.push({name: data.name, pop: data.population})
+  //       worldObj.world = worldArr
+  //        return worldObj
+  //     })
+  //    })
+  //  })
+ }
   getHomeworldData(api){ //put on page holding cards??
      fetch(api)
     .then((response) => response.json())
@@ -84,6 +79,7 @@ export default class App extends Component {
     fetch('http://swapi.co/api/vehicles/')
     .then((response) => response.json())
     .then((data) => {
+
       // console.log(data)
       // this.setState({
       //   data: {
@@ -97,9 +93,22 @@ export default class App extends Component {
 
 
 
+  // {this.getFilmData(),
+  //  this.getPeopleData()}
   componentWillMount(){
-    {this.getFilmData(),
-     this.getPeopleData()}
+
+    var films = this.getFilmData()
+    var p2 = this.getPeopleData()
+    // console.log('p2 ', p2)
+
+
+    Promise.all([films, p2]).then(values => {
+      console.log(values[0]);
+      this.setState({
+        filmData: values[0].results
+      })
+      console.log(this.state.filmData)
+    });
   }
 
 

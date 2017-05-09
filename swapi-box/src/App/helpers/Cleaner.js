@@ -1,7 +1,9 @@
 export default class Cleaner {
 
   filmCleaner(data){
+    // console.log(data.results[0], ' results')
     let scrollEpisode = Math.floor(Math.random() * ((7-1)+1) + 1)
+    // console.log(data.results[scrollEpisode].opening_crawl, ' random')
     return {
       crawl: data.results[scrollEpisode].opening_crawl,
       title: data.results[scrollEpisode].title,
@@ -11,7 +13,7 @@ export default class Cleaner {
 
   peopleCleaner(data){
     let peopleResults = data.results.map( person => {
-      console.log(person.homeworld)
+      // console.log(person.homeworld)
       var results
       return results = {
         person: person.name,
