@@ -140,23 +140,29 @@ export default class App extends Component {
     return (
       <div className="App">
         <h1>SwapiBox</h1>
-        <Scroll scrollData={this.state.filmData}/>
         <section>
           <button
             value='people'
             className='fetch-button'
             onClick={(e) => {this.handleClick(e)}}
           >People</button>
+
           <button
             value='planets'
             className='fetch-button'
             onClick={(e) => {this.handleClick(e)}}
           >Planets</button>
+
           <button
             value='vehicles'
             className='fetch-button'
             onClick={(e) => {this.handleClick(e)}}
           >Vehicles</button>
+
+        </section>
+        <div className='fade'></div>
+        <section className='star-wars'>
+          <Scroll scrollData={this.state.filmData}/>
         </section>
         <CardHolder
           selected={this.state.selected}
