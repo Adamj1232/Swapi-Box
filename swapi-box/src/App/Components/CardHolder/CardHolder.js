@@ -7,7 +7,7 @@ export const CardHolder = ({personData, trial}) => {
     return <div>Loading....</div>
   }
   if(trial.length === 10) {
-    
+
   }
 
   let people = trial.map((person) => {
@@ -16,6 +16,7 @@ export const CardHolder = ({personData, trial}) => {
             homeworld={person.homeworld2}
             species={person.species}
             population={person.population2}
+            key={person.name2}
           />
     )
   })
