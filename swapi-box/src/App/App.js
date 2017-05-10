@@ -126,8 +126,8 @@ export default class App extends Component {
   componentWillMount() {
     this.fetchFilms()
     this.fetchPeople()
-    // this.fetchVehicles()
-    // this.fetchPlanets()
+    this.fetchVehicles()
+    this.fetchPlanets()
   }
 
   handleClick(e){
