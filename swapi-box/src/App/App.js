@@ -13,6 +13,7 @@ export default class App extends Component {
     this.Cleaner = new Cleaner()
     this.state = {
       filmData: {},
+      selected: '',
       favorites: [],
       vehicles: [],
       people: [],
@@ -124,16 +125,41 @@ export default class App extends Component {
   }
   componentWillMount() {
     this.fetchFilms()
-    this.fetchPeople()
+    // this.fetchPeople()
     // this.fetchVehicles()
     // this.fetchPlanets()
+  }
+
+  handleClick(e){
+    this.setState({
+      selected: e.target.value
+    })
   }
 
   render() {
     return (
       <div className="App">
+        <h1>SwapiBox</h1>
         <Scroll scrollData={this.state.filmData}/>
+        <section>
+          <button
+            value='people'
+            className='fetch-button'
+            onClick={(e) => {this.handleClick(e)}}
+          >People</button>
+          <button
+            value='planets'
+            className='fetch-button'
+            onClick={(e) => {this.handleClick(e)}}
+          >Planets</button>
+          <button
+            value='vehicles'
+            className='fetch-button'
+            onClick={(e) => {this.handleClick(e)}}
+          >Vehicles</button>
+        </section>
         <CardHolder
+          selected={this.state.selected}
           peopleData={this.state.people}
           peopleAtrributes={this.state.peopleAtrributes}
         />

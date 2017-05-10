@@ -2,7 +2,7 @@ import React from 'react'
 import {Card} from '../Card/Card.js'
 
 
-export const CardHolder = ({peopleData, peopleAtrributes}) => {
+export const CardHolder = ({selected, peopleData, peopleAtrributes}) => {
   if(peopleData.length === 0){
     return <div>Loading....</div>
   }
