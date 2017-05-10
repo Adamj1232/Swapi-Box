@@ -13,28 +13,30 @@ export default class Cleaner {
 
    peopleCleaner(response) {
   return response.results.reduce((obj, person) => {
+    // console.log(person[person.name])
     if(!obj[person.name]) {
       // console.log(person, ' person')
-      obj[person.name] = {};
-      obj[person.name].name = person.name;
-      obj[person.name].homeworld = "example text";
+      obj[person.name] = [];
+
+      // obj[person.name].push('this');
+      // obj[person.name].homeworld = '';
 
       fetch(person.homeworld)
         .then(resp => resp.json())
-        .then(world => obj[person.name].homeworld = world.name)
+        .then(world => obj[person.name].push(world.name))
         .catch(() => 'error')
 
       fetch(person.homeworld)
         .then(resp => resp.json())
-        .then(world => obj[person.name].population = world.population)
+        .then(world => obj[person.name].push( world.population))
         .catch(() => 'error')
 
       fetch(person.species)
         .then(resp => resp.json())
-        .then(species => obj[person.name].species = species.name)
+        .then(species => obj[person.name].push( species.name))
         .catch(() => 'error')
     }
-    console.log('reduce ', obj)
+    // console.log('reduce ', obj)
     return obj
   }, {})
 }
@@ -72,4 +74,31 @@ export default class Cleaner {
   }
 
 
+personScrubber(){
+ let p1 = this.apiCall('http://www.swapi.co/api/people')
+
+ Promise.all([p1]).then(obj => {
+  //  console.log('obj', obj)
+   return obj.reduce((acc, peopleObj) => {
+     peopleObj.results.forEach((people, index) => {
+      //  acc[acc.length] = people.name
+       acc[people.name] = {}
+       Promise.all([this.apiCall(people.homeworld), this.apiCall(people.species[0])]).then(innerObj => {
+         acc[people.name].homeworld = innerObj[0].name
+         acc[people.name].pop = innerObj[0].population
+         acc[people.name].species = innerObj[1].name
+        //  console.log(acc)
+       })
+     })
+     return acc
+   }, {})
+ }).then((listOfPeople) => {
+   console.log(Object.keys(listOfPeople))
+   return listOfPeople
+ })
+}
+
+ apiCall(address) {
+ return fetch(address).then((response) => response.json())
+}
 }

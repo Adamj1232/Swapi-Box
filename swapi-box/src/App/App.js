@@ -14,9 +14,9 @@ export default class App extends Component {
     this.state = {
       favorites: [],
       scroll: [],
-      peopleData: {},
+      peopleData: [],
       filmData: [],
-      homeworld: []
+      // homeworld: this.Cleaner.personScrubber()
     }
   }
 
@@ -98,34 +98,19 @@ export default class App extends Component {
 
 
   componentWillMount(){
-
-    const peopleApi = 'http://www.swapi.co/api/people';
-     fetch(peopleApi)
-       .then(resp => resp.json())
-       .then((people) => {
-         this.setPeopleState(people)
-       })
-
-
-    // var films = this.getFilmData()
-    // var p2 = this.getPeopleData()
-    // // console.log('p2 ', p2)
-    //
-    //
-    // Promise.all([films, p2]).then(values => {
-    //   // console.log(values[0]);
-    //   this.setState({
-    //     filmData: values[0].results
-    //   })
-    //   // console.log(this.state.filmData)
-    // });
+    // let peopleDatas = this.Cleaner.personScrubber()
+    // console.log(peopleDatas);
+  this.setState({
+     favorites: ['cat'],
+     peopleData: this.Cleaner.personScrubber()
+   })
   }
 
 
   render() {
     return (
       <div className="App">
-        <Scroll scrollData={this.state.filmData} personData={this.state.peopleData}/>
+        <Scroll  personData={this.state.peopleData}/>
 
       </div>
     );
