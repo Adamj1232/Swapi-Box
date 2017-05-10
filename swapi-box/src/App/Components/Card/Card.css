@@ -1,0 +1,26 @@
+.card {
+  border: 1px solid white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 200px;
+  height: 300px;
+  margin: 10px;
+}
+
+.top-info {
+  display: flex;
+  border-bottom: 1px solid white;
+  /*align-items: center;*/
+  justify-content: space-between;
+}
+
+.top-info h3{
+  width: 120px;
+  margin-left: 2%;
+
+}
+
+.top-info button{
+  align-self: flex-end;
+}

@@ -1,10 +1,11 @@
 import React from 'react'
 import {Card} from '../Card/Card.js'
+import './CardHolder.css';
 
 export const CardHolder = ({selected, peopleData, planetData, vehicleData, peopleAtrributes}) => {
   // if(selected === '' ){
   //   return <div>Loading....</div>
-  // }
+  //
   if(peopleData.length === 0 || !planetData.length || !vehicleData.length ){
     return <div>Loading....</div>
   } //only run when making all api calls
@@ -26,8 +27,7 @@ export const CardHolder = ({selected, peopleData, planetData, vehicleData, peopl
 
   return (
     <section>
-      <h2>People</h2>
-      <div>{people}</div>
+      <div className="card-holder">{people}</div>
     </section>
   )
   } else if (selected === 'planets'){
@@ -48,13 +48,13 @@ export const CardHolder = ({selected, peopleData, planetData, vehicleData, peopl
 
     return (
       <section>
-        <h2>Planets</h2>
-        <div>{planets}</div>
+        <div className="card-holder">{planets}</div>
       </section>
     )
   } else if (selected === 'vehicles'){
     console.log('vehicles')
-    let vehicles = planetData.map((vehicle) => {
+    console.log(vehicleData)
+    let vehicles = vehicleData.map((vehicle) => {
       return(
         <Card
           name={vehicle.name}
@@ -68,9 +68,8 @@ export const CardHolder = ({selected, peopleData, planetData, vehicleData, peopl
     })
 
     return (
-      <section>
-        <h2>Vehicles</h2>
-        <div>{vehicles}</div>
+      <section >
+        <div className="card-holder">{vehicles}</div>
       </section>
     )
   }

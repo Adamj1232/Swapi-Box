@@ -140,6 +140,7 @@ export default class App extends Component {
     return (
       <div className="App">
         <h1>SwapiBox</h1>
+        <button className='favorites-top-btn'>View Favorites<span className='favorites-num'></span></button>
         <section>
           <button
             value='people'
