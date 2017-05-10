@@ -14,6 +14,7 @@ export default class App extends Component {
     this.state = {
       favorites: [],
       scroll: [],
+      people: [],
       peopleData: {},
       filmData: [],
       homeworld: []
@@ -91,13 +92,23 @@ export default class App extends Component {
     })
   }
 
-  setPeopleState(response) {
-    let cleanPeopleData = this.Cleaner.peopleCleaner(response);
-    this.setState({peopleData: cleanPeopleData});
+  fetchPeople() {
+    fetch('https://swapi.co/api/people/')
+      .then((response) => response.json())
+      .then((json) => {
+        console.log(json, ' json')
+        return this.setState({ people: json.results })
+      })
   }
+
+  // setPeopleState(response) {
+  //   let cleanPeopleData = this.Cleaner.peopleCleaner(response);
+  //   this.setState({peopleData: cleanPeopleData});
+  // }
 
 
   componentWillMount(){
+    this.fetchPeople()
 
   fetch('https://swapi.co/api/films')
     .then((response) => response.json())
@@ -109,12 +120,12 @@ export default class App extends Component {
 
 
 
-    const peopleApi = 'http://www.swapi.co/api/people';
-     fetch(peopleApi)
-       .then(resp => resp.json())
-       .then((people) => {
-         this.setPeopleState(people)
-       })
+    // const peopleApi = 'http://www.swapi.co/api/people';
+    //  fetch(peopleApi)
+    //    .then(resp => resp.json())
+    //    .then((people) => {
+    //      this.setPeopleState(people)
+    //    })
 
 
     // var films = this.getFilmData()
@@ -135,8 +146,8 @@ export default class App extends Component {
   render() {
     return (
       <div className="App">
-        <Scroll scrollData={this.state.filmData} personData={this.state.peopleData}/>
-
+        <Scroll scrollData={this.state.filmData}/>
+        <CardHolder personData={this.state.people}/>
       </div>
     );
   }
