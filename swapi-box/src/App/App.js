@@ -14,89 +14,80 @@ export default class App extends Component {
     this.state = {
       favorites: [],
       scroll: [],
+      vehicles: [],
       people: [],
-      peopleThings: {},
       trial: [],
-      peopleData: {},
       filmData: [],
       homeworld: []
     }
   }
 
-  getFilmData(){
-    return fetch('http://swapi.co/api/films/')
-    .then((response) => response.json())
-    .then((data) => {
-      // console.log(this.Cleaner.filmCleaner(data))
-      // return this.Cleaner.filmCleaner(data)
-      return data
+  // getFilmData(){
+  //   return fetch('http://swapi.co/api/films/')
+  //   .then((response) => response.json())
+  //   .then((data) => {
+  //     return data
+  //   })
+  // }
 
-    })
-  }
+  // getHomeworldData(api){ //put on page holding cards??
+  //    fetch(api)
+  //   .then((response) => response.json())
+  //   .then((data) => {
+  //     //  console.log(data.name)
+  //      return data
+  //   })
+  // }
 
-  getPeopleData(){
-  //  let worldObj = {}
-  //  let worldArr = []
-   return fetch('http://swapi.co/api/people/')
-   .then((response) => response.json())
-   .then((data) => {
-     return this.Cleaner.peopleCleaner(data)
+  // getPlanetsData(){
+  //   fetch('http://swapi.co/api/planets/')
+  //   .then((response) => response.json())
+  //   .then((data) => {
+  //     // console.log(data)
+  //     // this.setState({
+  //     //   data: {
+  //     //     crawl: data.results[scrollEpisode].opening_crawl,
+  //     //     title: data.results[scrollEpisode].title,
+  //     //     date: data.results[scrollEpisode].release_date,
+  //     //   }
+  //     // })
+  //   })
+  // }
+  // getVehicleData(){
+  //   fetch('http://swapi.co/api/vehicles/')
+  //   .then((response) => response.json())
+  //   .then((data) => {
+  //
+  //     // console.log(data)
+  //     // this.setState({
+  //     //   data: {
+  //     //     crawl: data.results[scrollEpisode].opening_crawl,
+  //     //     title: data.results[scrollEpisode].title,
+  //     //     date: data.results[scrollEpisode].release_date,
+  //     //   }
+  //     // })
+  //   })
+  // }
 
-   })
-  //  .then((data2) => {
-  //    data2.peopleData.forEach( person => {
-  //      fetch(person.homeworldAPI)
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       worldArr.push({name: data.name, pop: data.population})
-  //       worldObj.world = worldArr
-  //        return worldObj
-  //     })
-  //    })
-  //  })
- }
-  getHomeworldData(api){ //put on page holding cards??
-     fetch(api)
-    .then((response) => response.json())
-    .then((data) => {
-      //  console.log(data.name)
-       return data
-    })
-  }
-
-  getPlanetsData(){
-    fetch('http://swapi.co/api/planets/')
-    .then((response) => response.json())
-    .then((data) => {
-      // console.log(data)
-      // this.setState({
-      //   data: {
-      //     crawl: data.results[scrollEpisode].opening_crawl,
-      //     title: data.results[scrollEpisode].title,
-      //     date: data.results[scrollEpisode].release_date,
-      //   }
-      // })
-    })
-  }
-  getVehicleData(){
-    fetch('http://swapi.co/api/vehicles/')
-    .then((response) => response.json())
-    .then((data) => {
-
-      // console.log(data)
-      // this.setState({
-      //   data: {
-      //     crawl: data.results[scrollEpisode].opening_crawl,
-      //     title: data.results[scrollEpisode].title,
-      //     date: data.results[scrollEpisode].release_date,
-      //   }
-      // })
+  fetchVehicles(){
+    fetch('https://swapi.co/api/vehicles/')
+    .then( (response) => response.json())
+    .then( json => {
+      json.results.map( result => {
+        this.state.vehicles.push({
+          name: result.name,
+          model: result.model,
+          class: result.vehicle_class,
+          passengers: result.passengers
+        }
+        )
+      })
     })
   }
 
   fetchPeople() {
     fetch('https://swapi.co/api/people/')
-      .then((response) => response.json())
+      .then( response  => response.json())
       .then((json) => {
          this.setState({ people: json.results })
          json.results.map((result) => {
@@ -131,6 +122,7 @@ export default class App extends Component {
 
   componentWillMount(){
     this.fetchPeople()
+    this.fetchVehicles()
 
   fetch('https://swapi.co/api/films')
     .then((response) => response.json())
