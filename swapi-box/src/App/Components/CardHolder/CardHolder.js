@@ -2,29 +2,29 @@ import React from 'react'
 import {Card} from '../Card/Card.js'
 
 
-export const CardHolder = ({personData, trial}) => {
-  if(personData.length === 0){
+export const CardHolder = ({selected, peopleData, peopleAtrributes}) => {
+  if(peopleData.length === 0){
     return <div>Loading....</div>
   }
-  if(trial.length === 10) {
-
+  if(peopleAtrributes.length === 10) {
   }
 
-  let people = trial.map((person) => {
+  let people = peopleAtrributes.map((person) => {
     return(
-      <Card name={person.name2}
-            homeworld={person.homeworld2}
-            species={person.species}
-            population={person.population2}
-            key={person.name2}
-          />
+      <Card
+        name={person.name2}
+        homeworld={person.homeworld2}
+        species={person.species}
+        population={person.population2}
+        key={person.name2}
+      />
     )
   })
 
-return (
-  <section>
-    <h2>People</h2>
-    <div>{people}</div>
-  </section>
-)
+  return (
+    <section>
+      <h2>People</h2>
+      <div>{people}</div>
+    </section>
+  )
 }

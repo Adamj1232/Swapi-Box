@@ -12,18 +12,18 @@ export default class App extends Component {
     super()
     this.Cleaner = new Cleaner()
     this.state = {
+      filmData: {},
+      selected: '',
       favorites: [],
-      scroll: [],
       vehicles: [],
       people: [],
-      trial: [],
-      filmData: [],
+      peopleAtrributes: [],
       homeworld: [],
       planets: []
     }
   }
 
-  fetchVehicles(){
+  fetchVehicles() {
     fetch('https://swapi.co/api/vehicles/')
     .then( (response) => response.json())
     .then( json => {
@@ -84,14 +84,14 @@ export default class App extends Component {
           let species2 = this.getPeople(result.species[0])
 
            Promise.all([homeworld2, species2]).then((values)=>{
-                this.state.trial.push({
+                this.state.peopleAtrributes.push({
                  name2: result.name,
                  homeworld2: values[0].name,
                  species: values[1].name,
                  population2: values[0].population
                 })
                 this.setState({
-                   trial: this.state.trial
+                   peopleAtrributes: this.state.peopleAtrributes
                 })
            })
          })
@@ -104,27 +104,65 @@ export default class App extends Component {
         .then(jsonResult => jsonResult)
   }
 
-
-  componentWillMount(){
-    this.fetchPeople()
-    this.fetchVehicles()
-    this.fetchPlanets()
-
-    fetch('https://swapi.co/api/films')
+  fetchFilms() {
+    return fetch('https://swapi.co/api/films')
       .then((response) => response.json())
       .then((json) => {
-        const index = Math.floor((Math.random() * json.results.length))
-        this.setState({ filmData: json.results[index] })
+        // console.log(json.results)
+        // const index = Math.floor((Math.random() * json.results.length))
+        this.setState({ filmData: this.Cleaner.filmCleaner(json.results) })
       })
   }
 
+  buttonSelect(buttonName) {
+    if(buttonName === 'planets'){
+      return this.fetchPlanets()
+    } else if (buttonName === 'people'){
+      return this.fetchPeople()
+    } else {
+      return this.fetchVehicles()
+    }
+  }
+  componentWillMount() {
+    this.fetchFilms()
+    // this.fetchPeople()
+    // this.fetchVehicles()
+    // this.fetchPlanets()
+  }
+
+  handleClick(e){
+    this.setState({
+      selected: e.target.value
+    })
+  }
 
   render() {
     return (
       <div className="App">
+        <h1>SwapiBox</h1>
         <Scroll scrollData={this.state.filmData}/>
-        <CardHolder personData={this.state.people}
-                    trial={this.state.trial}/>
+        <section>
+          <button
+            value='people'
+            className='fetch-button'
+            onClick={(e) => {this.handleClick(e)}}
+          >People</button>
+          <button
+            value='planets'
+            className='fetch-button'
+            onClick={(e) => {this.handleClick(e)}}
+          >Planets</button>
+          <button
+            value='vehicles'
+            className='fetch-button'
+            onClick={(e) => {this.handleClick(e)}}
+          >Vehicles</button>
+        </section>
+        <CardHolder
+          selected={this.state.selected}
+          peopleData={this.state.people}
+          peopleAtrributes={this.state.peopleAtrributes}
+        />
       </div>
     );
   }
