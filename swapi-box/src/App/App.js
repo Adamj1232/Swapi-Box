@@ -76,40 +76,37 @@ export default class App extends Component {
 
   fetchPeople() {
     fetch('https://swapi.co/api/people/')
-      .then( response  => response.json())
-      .then( json => {
-        this.setState({ people: json.results })
-        json.results.map((result) => {
-          let homeworld2 = this.getPeople(result.homeworld)
-          let species2 = this.getPeople(result.species[0])
-
-           Promise.all([homeworld2, species2]).then((values)=>{
-                this.state.peopleAtrributes.push({
-                 name2: result.name,
-                 homeworld2: values[0].name,
-                 species: values[1].name,
-                 population2: values[0].population
-                })
-                this.setState({
-                   peopleAtrributes: this.state.peopleAtrributes
-                })
-           })
-         })
+    .then( response  => response.json())
+    .then( json => {
+      this.setState({ people: json.results })
+      json.results.map((result) => {
+        let homeworld2 = this.getPeople(result.homeworld)
+        let species2 = this.getPeople(result.species[0])
+        Promise.all([homeworld2, species2]).then((values)=>{
+          this.state.peopleAtrributes.push({
+            name2: result.name,
+            homeworld2: values[0].name,
+            species: values[1].name,
+            population2: values[0].population
+          })
+          this.setState({
+             peopleAtrributes: this.state.peopleAtrributes
+          })
+        })
       })
+    })
   }
 
   getPeople(url) {
     return fetch(url)
-      .then(response => response.json())
-        .then(jsonResult => jsonResult)
+    .then(response => response.json())
+    .then(jsonResult => jsonResult)
   }
 
   fetchFilms() {
     return fetch('https://swapi.co/api/films')
       .then((response) => response.json())
       .then((json) => {
-        // console.log(json.results)
-        // const index = Math.floor((Math.random() * json.results.length))
         this.setState({ filmData: this.Cleaner.filmCleaner(json.results) })
       })
   }
@@ -123,6 +120,15 @@ export default class App extends Component {
       return this.fetchVehicles()
     }
   }
+
+  clickFavoriteSelect(e, objectData) {
+    console.log(objectData)
+    this.state.favorites.push(objectData)
+    this.setState({
+      favorites: this.state.favorites
+    })
+  }
+
   componentWillMount() {
     this.fetchFilms()
     this.fetchPeople()
@@ -140,7 +146,14 @@ export default class App extends Component {
     return (
       <div className="App">
         <h1>SwapiBox</h1>
-        <button className='favorites-top-btn'>View Favorites<span className='favorites-num'></span></button>
+        <button
+          className='favorites-top-btn'
+          value='favorites'
+          onClick={(e) => {this.handleClick(e)}}
+        >
+          View Favorites
+          <span className='favorites-num'>?</span>
+        </button>
         <section>
           <button
             value='people'
@@ -171,6 +184,8 @@ export default class App extends Component {
           planetData={this.state.planets}
           vehicleData={this.state.vehicles}
           peopleAtrributes={this.state.peopleAtrributes}
+          handleFavoriteSelect={this.clickFavoriteSelect.bind(this)}
+          favoriteCards={this.state.favorites}
         />
       </div>
     );
