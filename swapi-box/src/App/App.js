@@ -15,6 +15,7 @@ export default class App extends Component {
       favorites: [],
       scroll: [],
       people: [],
+      peopleThings: {},
       peopleData: {},
       filmData: [],
       homeworld: []
@@ -96,9 +97,24 @@ export default class App extends Component {
     fetch('https://swapi.co/api/people/')
       .then((response) => response.json())
       .then((json) => {
-        console.log(json, ' json')
-        return this.setState({ people: json.results })
+        console.log(json.results[0], ' json')
+         this.setState({ people: json.results })
+         this.setState({ name2: json.results[0].name,
+                         homeworld2: this.getPeople(json.results[0].homeworld, 'homeworld', 'name'),
+                         species2: this.getPeople(json.results[0].species[0], 'species', 'name'),
+                         population2: this.getPeople(json.results[0].homeworld, 'population', 'population'),
+                       })
       })
+  }
+
+  getPeople(url, state, key) {
+    // console.log(url)
+    fetch(url).then((response) => {
+      // console.log('response ', response)
+      return response.json()
+    }).then(jsonResult => {
+      // console.log('result ', jsonResult)
+      this.setState({ [state]: jsonResult[[key]] })})
   }
 
   // setPeopleState(response) {

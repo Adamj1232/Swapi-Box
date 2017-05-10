@@ -12,19 +12,17 @@ export class Card extends Component {
   }
 
   getPeople(url, state, key) {
-    console.log(url)
+    // console.log(url)
     fetch(url).then((response) => {
-      console.log('response ', response)
+      // console.log('response ', response)
       return response.json()
     }).then(jsonResult => {
-      console.log('result ', jsonResult)
+      // console.log('result ', jsonResult)
       this.setState({ [state]: jsonResult[[key]] })})
   }
 
   componentDidMount(){
-    // console.log(this.props.personData.homeworld, ' homeworld')
-    // console.log(this.props.personData.species[0], ' species')
-    // console.log(this.props.personData.homeworld, ' homeworld')
+
     this.setState({ name: this.props.personData.name,
                     homeworld: this.getPeople(this.props.personData.homeworld, 'homeworld', 'name'),
                     species: this.getPeople(this.props.personData.species[0], 'species', 'name'),
