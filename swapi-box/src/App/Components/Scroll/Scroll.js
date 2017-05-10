@@ -6,10 +6,12 @@ export const Scroll = ({scrollData}) => {
   }
 
   return (
-    <section>
-      <h3>{scrollData.crawl}</h3>
-      <div>{scrollData.title}</div>
-      <h4>{scrollData.date}</h4>
+    <section className='crawl'>
+      <div className="title">
+        <h2>{scrollData.date}</h2>
+        <p>{scrollData.title}</p>
+      </div>
+      <p className='widen'>{scrollData.crawl}</p>
     </section>
   )
 }
