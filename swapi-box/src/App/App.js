@@ -99,6 +99,16 @@ export default class App extends Component {
 
   componentWillMount(){
 
+  fetch('https://swapi.co/api/films')
+    .then((response) => response.json())
+    .then((json) => {
+      const index = Math.floor((Math.random() * json.results.length))
+      this.setState({ filmData: json.results[index] })
+    })
+
+
+
+
     const peopleApi = 'http://www.swapi.co/api/people';
      fetch(peopleApi)
        .then(resp => resp.json())
