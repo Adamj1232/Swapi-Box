@@ -125,7 +125,7 @@ export default class App extends Component {
   }
   componentWillMount() {
     this.fetchFilms()
-    // this.fetchPeople()
+    this.fetchPeople()
     // this.fetchVehicles()
     // this.fetchPlanets()
   }
@@ -167,6 +167,8 @@ export default class App extends Component {
         <CardHolder
           selected={this.state.selected}
           peopleData={this.state.people}
+          planetData={this.state.planets}
+          vehicleData={this.state.vehicles}
           peopleAtrributes={this.state.peopleAtrributes}
         />
       </div>

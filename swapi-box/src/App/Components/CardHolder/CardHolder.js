@@ -1,14 +1,16 @@
 import React from 'react'
 import {Card} from '../Card/Card.js'
 
-
-export const CardHolder = ({selected, peopleData, peopleAtrributes}) => {
-  if(peopleData.length === 0){
+export const CardHolder = ({selected, peopleData, planetData, vehicleData, peopleAtrributes}) => {
+  if(selected === '' ){
     return <div>Loading....</div>
   }
-  if(peopleAtrributes.length === 10) {
-  }
+  // if(peopleData.length === 0 || !planetData.length || !vehicleData.length ){
+  //   return <div>Loading....</div>
+  // } only run when making all api calls
 
+  if(selected === 'people'){
+    console.log('people')
   let people = peopleAtrributes.map((person) => {
     return(
       <Card
@@ -27,4 +29,16 @@ export const CardHolder = ({selected, peopleData, peopleAtrributes}) => {
       <div>{people}</div>
     </section>
   )
+} else if (selected === 'planets'){
+  console.log('planets')
+  return(
+    <div>Planets</div>
+  )
+} else if (selected === 'vehicles'){
+  console.log('vehicles')
+  return(
+    <div>Vehicles</div>
+  )
+}
+
 }
