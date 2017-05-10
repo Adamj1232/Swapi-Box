@@ -14,7 +14,14 @@ export default class App extends Component {
     this.state = {
       favorites: [],
       scroll: [],
+<<<<<<< HEAD
       peopleData: [],
+=======
+      people: [],
+      peopleThings: {},
+      trial: [],
+      peopleData: {},
+>>>>>>> 1725e1b0b0e8e525045a886d3d71e873d51d5ed0
       filmData: [],
       // homeworld: this.Cleaner.personScrubber()
     }
@@ -91,27 +98,97 @@ export default class App extends Component {
     })
   }
 
-  setPeopleState(response) {
-    let cleanPeopleData = this.Cleaner.peopleCleaner(response);
-    this.setState({peopleData: cleanPeopleData});
+  fetchPeople() {
+    fetch('https://swapi.co/api/people/')
+      .then((response) => response.json())
+      .then((json) => {
+         this.setState({ people: json.results })
+         json.results.map((result) => {
+           let homeworld2 = this.getPeople(result.homeworld, 'homeworld', 'name')
+           let species2 = this.getPeople(result.species[0], 'species', 'name')
+
+           Promise.all([homeworld2, species2]).then((values)=>{
+                this.state.trial.push(
+               {name2: result.name,
+                 homeworld2: values[0].name,
+                 species: values[1].name,
+                 population2: values[0].population})
+                 this.setState({
+                   trial: this.state.trial
+                 })
+           })
+         })
+      })
   }
+
+  getPeople(url) {
+    return fetch(url)
+      .then(response => response.json())
+        .then(jsonResult => jsonResult)
+  }
+
+  // setPeopleState(response) {
+  //   let cleanPeopleData = this.Cleaner.peopleCleaner(response);
+  //   this.setState({peopleData: cleanPeopleData});
+  // }
 
 
   componentWillMount(){
+<<<<<<< HEAD
     // let peopleDatas = this.Cleaner.personScrubber()
     // console.log(peopleDatas);
   this.setState({
      favorites: ['cat'],
      peopleData: this.Cleaner.personScrubber()
    })
+=======
+    this.fetchPeople()
+
+  fetch('https://swapi.co/api/films')
+    .then((response) => response.json())
+    .then((json) => {
+      const index = Math.floor((Math.random() * json.results.length))
+      this.setState({ filmData: json.results[index] })
+    })
+
+
+
+
+    // const peopleApi = 'http://www.swapi.co/api/people';
+    //  fetch(peopleApi)
+    //    .then(resp => resp.json())
+    //    .then((people) => {
+    //      this.setPeopleState(people)
+    //    })
+
+
+    // var films = this.getFilmData()
+    // var p2 = this.getPeopleData()
+    // // console.log('p2 ', p2)
+    //
+    //
+    // Promise.all([films, p2]).then(values => {
+    //   // console.log(values[0]);
+    //   this.setState({
+    //     filmData: values[0].results
+    //   })
+    //   // console.log(this.state.filmData)
+    // });
+>>>>>>> 1725e1b0b0e8e525045a886d3d71e873d51d5ed0
   }
 
 
   render() {
     return (
       <div className="App">
+<<<<<<< HEAD
         <Scroll  personData={this.state.peopleData}/>
 
+=======
+        <Scroll scrollData={this.state.filmData}/>
+        <CardHolder personData={this.state.people}
+                    trial={this.state.trial}/>
+>>>>>>> 1725e1b0b0e8e525045a886d3d71e873d51d5ed0
       </div>
     );
   }

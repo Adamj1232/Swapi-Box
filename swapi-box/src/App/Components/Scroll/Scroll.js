@@ -1,5 +1,6 @@
 import React from 'react'
 
+<<<<<<< HEAD
 export const Scroll = ({personData}) => {
   // console.log(scrollData[0], ' scrolling')
   // if(personData.length === 0){
@@ -13,11 +14,20 @@ export const Scroll = ({personData}) => {
   // let result = personKeys.forEach((key) => {
   //   console.log(personData[key])
   // })
+=======
+export const Scroll = ({scrollData}) => {
+  // console.log(scrollData[0], ' scrolling')
+  if(scrollData.length === 0){
+    return <div>Loading....</div>
+  }
+
+  
+>>>>>>> 1725e1b0b0e8e525045a886d3d71e873d51d5ed0
 return (
   <section>
-    <div>hello</div>
-    <h3></h3>
-    <h4></h4>
+    <div>{scrollData.title}</div>
+    <h3>{scrollData.opening_crawl}</h3>
+    <h4>{scrollData.release_date}</h4>
   </section>
 )
 }
