@@ -14,9 +14,13 @@ export const CardHolder = ({personData, trial}) => {
     console.log(trial[1].population2, ' pop')
   }
 
-  let people = personData.map((person) => {
+  let people = trial.map((person) => {
     return(
-      <Card personData={person}/>
+      <Card name={person.name2}
+            homeworld={person.homeworld2}
+            species={person.species}
+            population={person.population2}
+          />
     )
   })
 

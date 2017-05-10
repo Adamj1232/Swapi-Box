@@ -98,15 +98,13 @@ export default class App extends Component {
     fetch('https://swapi.co/api/people/')
       .then((response) => response.json())
       .then((json) => {
-        // console.log(json.results[0], ' json')
          this.setState({ people: json.results })
          json.results.map((result) => {
            let homeworld2 = this.getPeople(result.homeworld, 'homeworld', 'name')
            let species2 = this.getPeople(result.species[0], 'species', 'name')
 
            Promise.all([homeworld2, species2]).then((values)=>{
-            //  console.log(values[0], ' vals')
-             this.state.trial.push(
+                this.state.trial.push(
                {name2: result.name,
                  homeworld2: values[0].name,
                  species: values[1].name,
@@ -119,15 +117,10 @@ export default class App extends Component {
       })
   }
 
-  getPeople(url, state, key) {
-    // console.log(url)
-    return fetch(url).then((response) => {
-      // console.log('response ', response)
-      return response.json()
-    }).then(jsonResult => {
-      // console.log('result ', jsonResult)
-      this.setState({ [state]: jsonResult[[key]] })
-    return jsonResult})
+  getPeople(url) {
+    return fetch(url)
+      .then(response => response.json())
+        .then(jsonResult => jsonResult)
   }
 
   // setPeopleState(response) {
