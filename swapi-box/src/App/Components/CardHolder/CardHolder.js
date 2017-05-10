@@ -2,7 +2,7 @@ import React from 'react'
 import {Card} from '../Card/Card.js'
 import './CardHolder.css';
 
-export const CardHolder = ({selected, peopleData, planetData, vehicleData, peopleAtrributes}) => {
+export const CardHolder = ({selected, peopleData, planetData, vehicleData, peopleAtrributes, handleFavoriteSelect, favoriteCards}) => {
   // if(selected === '' ){
   //   return <div>Loading....</div>
   //
@@ -11,7 +11,6 @@ export const CardHolder = ({selected, peopleData, planetData, vehicleData, peopl
   } //only run when making all api calls
 
   if(selected === 'people'){
-    console.log('people')
   let people = peopleAtrributes.map((person) => {
     return(
       <Card
@@ -21,6 +20,7 @@ export const CardHolder = ({selected, peopleData, planetData, vehicleData, peopl
         population={person.population2}
         key={person.name2}
         selected={selected}
+        cardOnClick={handleFavoriteSelect}
       />
     )
   })
@@ -31,7 +31,6 @@ export const CardHolder = ({selected, peopleData, planetData, vehicleData, peopl
     </section>
   )
   } else if (selected === 'planets'){
-    console.log('planets')
     let planets = planetData.map((planet) => {
       return(
         <Card
@@ -42,6 +41,7 @@ export const CardHolder = ({selected, peopleData, planetData, vehicleData, peopl
           residents={planet.residents}
           key={planet.name}
           selected={selected}
+          cardOnClick={handleFavoriteSelect}
         />
       )
     })
@@ -52,8 +52,6 @@ export const CardHolder = ({selected, peopleData, planetData, vehicleData, peopl
       </section>
     )
   } else if (selected === 'vehicles'){
-    console.log('vehicles')
-    console.log(vehicleData)
     let vehicles = vehicleData.map((vehicle) => {
       return(
         <Card
@@ -63,6 +61,7 @@ export const CardHolder = ({selected, peopleData, planetData, vehicleData, peopl
           passengers={vehicle.passengers}
           key={vehicle.name}
           selected={selected}
+          cardOnClick={handleFavoriteSelect}
         />
       )
     })
@@ -70,6 +69,34 @@ export const CardHolder = ({selected, peopleData, planetData, vehicleData, peopl
     return (
       <section >
         <div className="card-holder">{vehicles}</div>
+      </section>
+    )
+  } else if (selected === 'favorites'){
+    let favorites = favoriteCards.map((favoriteCard) => {
+      return(
+        <Card
+          name={favoriteCard.name}
+          homeworld={favoriteCard.homeworld}
+          species={favoriteCard.species}
+          population={favoriteCard.population}
+          terrain={favoriteCard.terrain}
+          species={favoriteCard.species}
+          climate={favoriteCard.climate}
+          residents={favoriteCard.residents}
+          population={favoriteCard.population}
+          model={favoriteCard.model}
+          vehicleClass={favoriteCard.vehicleClass}
+          passengers={favoriteCard.passengers}
+          key={favoriteCard.name}
+          selected={favoriteCard.selected}
+          cardOnClick={handleFavoriteSelect}
+        />
+      )
+    })
+
+    return (
+      <section >
+        <div className="card-holder">{favorites}</div>
       </section>
     )
   }
