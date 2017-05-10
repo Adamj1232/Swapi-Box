@@ -91,24 +91,34 @@ export default class App extends Component {
     })
   }
 
+  setPeopleState(response) {
+    let cleanPeopleData = this.Cleaner.peopleCleaner(response);
+    this.setState({peopleData: cleanPeopleData});
+  }
 
 
-  // {this.getFilmData(),
-  //  this.getPeopleData()}
   componentWillMount(){
 
-    var films = this.getFilmData()
-    var p2 = this.getPeopleData()
-    // console.log('p2 ', p2)
+    const peopleApi = 'http://www.swapi.co/api/people';
+     fetch(peopleApi)
+       .then(resp => resp.json())
+       .then((people) => {
+         this.setPeopleState(people)
+       })
 
 
-    Promise.all([films, p2]).then(values => {
-      // console.log(values[0]);
-      this.setState({
-        filmData: values[0].results
-      })
-      // console.log(this.state.filmData)
-    });
+    // var films = this.getFilmData()
+    // var p2 = this.getPeopleData()
+    // // console.log('p2 ', p2)
+    //
+    //
+    // Promise.all([films, p2]).then(values => {
+    //   // console.log(values[0]);
+    //   this.setState({
+    //     filmData: values[0].results
+    //   })
+    //   // console.log(this.state.filmData)
+    // });
   }
 
 

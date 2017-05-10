@@ -2,21 +2,26 @@ import React from 'react'
 
 export const Scroll = ({scrollData, personData}) => {
   // console.log(scrollData[0], ' scrolling')
-  if(scrollData.length === 0){
+  if(personData.length === 0){
     return <div>Loading....</div>
   }
 
-  console.log(scrollData);
+  console.log(personData)
+  let personKeys = Object.keys(personData)
+  let result = personKeys.forEach((key) => {
+    // console.log(personData[key])
+  })
 return (
   <section>
-    <div>{scrollData[0].title}</div>
-    <h3>{scrollData[0].title}</h3>
-    <h4>{scrollData[0].date}</h4>
+    <div>hello</div>
+    <h3></h3>
+    <h4></h4>
   </section>
 )
-// <h5>{homeworldData.name}</h5>
 }
-
+//<div>{scrollData[0].title}</div>
+//<h3>{scrollData[0].title}</h3>
+//<h4>{scrollData[0].date}</h4>
 
 
 
