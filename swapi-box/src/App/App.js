@@ -16,6 +16,7 @@ export default class App extends Component {
       scroll: [],
       people: [],
       peopleThings: {},
+      trial: [],
       peopleData: {},
       filmData: [],
       homeworld: []
@@ -97,24 +98,36 @@ export default class App extends Component {
     fetch('https://swapi.co/api/people/')
       .then((response) => response.json())
       .then((json) => {
-        console.log(json.results[0], ' json')
+        // console.log(json.results[0], ' json')
          this.setState({ people: json.results })
-         this.setState({ name2: json.results[0].name,
-                         homeworld2: this.getPeople(json.results[0].homeworld, 'homeworld', 'name'),
-                         species2: this.getPeople(json.results[0].species[0], 'species', 'name'),
-                         population2: this.getPeople(json.results[0].homeworld, 'population', 'population'),
-                       })
+         json.results.map((result) => {
+           let homeworld2 = this.getPeople(result.homeworld, 'homeworld', 'name')
+           let species2 = this.getPeople(result.species[0], 'species', 'name')
+
+           Promise.all([homeworld2, species2]).then((values)=>{
+            //  console.log(values[0], ' vals')
+             this.state.trial.push(
+               {name2: result.name,
+                 homeworld2: values[0].name,
+                 species: values[1].name,
+                 population2: values[0].population})
+                 this.setState({
+                   trial: this.state.trial
+                 })
+           })
+         })
       })
   }
 
   getPeople(url, state, key) {
     // console.log(url)
-    fetch(url).then((response) => {
+    return fetch(url).then((response) => {
       // console.log('response ', response)
       return response.json()
     }).then(jsonResult => {
       // console.log('result ', jsonResult)
-      this.setState({ [state]: jsonResult[[key]] })})
+      this.setState({ [state]: jsonResult[[key]] })
+    return jsonResult})
   }
 
   // setPeopleState(response) {
@@ -163,7 +176,8 @@ export default class App extends Component {
     return (
       <div className="App">
         <Scroll scrollData={this.state.filmData}/>
-        <CardHolder personData={this.state.people}/>
+        <CardHolder personData={this.state.people}
+                    trial={this.state.trial}/>
       </div>
     );
   }
