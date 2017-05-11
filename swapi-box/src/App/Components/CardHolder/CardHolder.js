@@ -2,11 +2,9 @@ import React from 'react'
 import {Card} from '../Card/Card.js'
 import './CardHolder.css';
 
-export const CardHolder = ({selected, peopleData, planetData, vehicleData, peopleAtrributes, handleFavoriteSelect, favoriteCards}) => {
-  // if(selected === '' ){
-  //   return <div>Loading....</div>
-  //
-  if(peopleData.length === 0 && !planetData.length && !vehicleData.length ){
+export const CardHolder = ({selected, peopleData, planetData, vehicleData, peopleAtrributes, handleFavoriteSelect, favoriteCards, btnSelected}) => {
+
+  if(!peopleData.length && !planetData.length && !vehicleData.length ){
     return <div>Loading....</div>
   } //only run when making all api calls
 
@@ -21,6 +19,7 @@ export const CardHolder = ({selected, peopleData, planetData, vehicleData, peopl
         key={person.name2}
         selected={selected}
         cardOnClick={handleFavoriteSelect}
+        toggleButtonClass={btnSelected}
       />
     )
   })
@@ -42,6 +41,7 @@ export const CardHolder = ({selected, peopleData, planetData, vehicleData, peopl
           key={planet.name}
           selected={selected}
           cardOnClick={handleFavoriteSelect}
+          toggleButtonClass={btnSelected}
         />
       )
     })
@@ -62,6 +62,7 @@ export const CardHolder = ({selected, peopleData, planetData, vehicleData, peopl
           key={vehicle.name}
           selected={selected}
           cardOnClick={handleFavoriteSelect}
+          toggleButtonClass={btnSelected}
         />
       )
     })
@@ -90,6 +91,7 @@ export const CardHolder = ({selected, peopleData, planetData, vehicleData, peopl
           key={favoriteCard.name}
           selected={favoriteCard.selected}
           cardOnClick={handleFavoriteSelect}
+          toggleButtonClass={btnSelected}
         />
       )
     })

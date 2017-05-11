@@ -1,5 +1,3 @@
-
-
 .App {
   text-align: center;
 }
@@ -27,4 +25,12 @@
 
 .selected {
   background-color: red;
+}
+
+.fav {
+  background-color: green;
+}
+
+button {
+  background-color: #6499ef;
 }

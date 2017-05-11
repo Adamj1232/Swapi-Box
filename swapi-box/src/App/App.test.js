@@ -106,17 +106,17 @@ describe('App functionality', () => {
     expect(fetchMock.lastUrl()).toEqual('https://swapi.co/api/vehicles/')
   })
 
-  it('should have peopleData after mounting', async () => {
-    mockCalls()
-    const wrapper = mount(<App />)
-    expect(wrapper.state('vehicles')).toEqual([])
-
-    await wait()
-
-    expect(fetchMock.called()).toEqual(true)
-    expect(wrapper.state('vehicles')[0]).toHaveProperty('passengers')
-
-    expect(fetchMock.lastUrl()).toEqual('https://swapi.co/api/vehicles/')
-  })
+  // it('should have peopleData after mounting', async () => {
+  //   mockCalls()
+  //   const wrapper = mount(<App />)
+  //   expect(wrapper.state('vehicles')).toEqual([])
+  //
+  //   await wait()
+  //
+  //   expect(fetchMock.called()).toEqual(true)
+  //   expect(wrapper.state('vehicles')[0]).toHaveProperty('passengers')
+  //
+  //   expect(fetchMock.lastUrl()).toEqual('https://swapi.co/api/vehicles/')
+  // })
 
 })
