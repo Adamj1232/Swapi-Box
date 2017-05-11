@@ -35,6 +35,9 @@ export default class App extends Component {
           passengers: result.passengers
         }
         )
+        this.setState({
+          vehicles: this.state.vehicles
+        })
       })
     })
   }

@@ -34,10 +34,10 @@ describe('App instantiation', () => {
 
 describe('App functionality', () => {
 
-  afterEach(() => {
-    // expect(fetchMock.calls().unmatched).toEqual([])
-    fetchMock.restore()
-  })
+  // afterEach(() => {
+  //   // expect(fetchMock.calls().unmatched).toEqual([])
+  //   fetchMock.restore()
+  // })
 
   const mockCalls = () => {
     fetchMock.get('https://swapi.co/api/films', {
@@ -71,9 +71,22 @@ describe('App functionality', () => {
     const wrapper = mount(<App />)
     await wait()
     const keys = Object.keys(wrapper.state('filmData'))
-
-    expect(keys.length).toEqual(3)
+    // console.log(mockedFilms)
     expect(keys[1]).toEqual('title')
+    expect(keys.length).toEqual(3)
+  })
+
+  it('should have vehicleData after mounting', async () => {
+    // console.log(mockedVehicles)
+    mockCalls()
+    const wrapper = mount(<App />)
+    await wait()
+    // const keys = Object.keys(wrapper.state('vehicles'))
+
+    console.log(wrapper.state('planets'))
+
+    // expect(keys.length).toEqual(3)
+    // expect(wrapper.state('vehicles').results.length).toEqual(10)
   })
 
 })
