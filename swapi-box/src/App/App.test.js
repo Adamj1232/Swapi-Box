@@ -14,21 +14,21 @@ describe('App instantiation', () => {
     ReactDOM.render(<App />, div)
 
   })
-  //
-  // it('should have initial states start empty values',  () => {
-  //
-  //   const wrapper = mount(<App />)
-  //
-  //   // await wrapper.update()
-  //
-  //   expect(wrapper.state('filmData')).toEqual({})
-  //   expect(wrapper.state('selected')).toEqual('')
-  //   expect(wrapper.state('favorites')).toEqual([])
-  //   expect(wrapper.state('vehicles')).toEqual([])
-  //   expect(wrapper.state('people')).toEqual([])
-  //   expect(wrapper.state('peopleAtrributes')).toEqual([])
-  //   expect(wrapper.state('planets')).toEqual([])
-  // })
+
+  it('should have initial states start empty values',  () => {
+
+    const wrapper = mount(<App />)
+
+    // await wrapper.update()
+
+    expect(wrapper.state('filmData')).toEqual({})
+    expect(wrapper.state('selected')).toEqual('')
+    expect(wrapper.state('favorites')).toEqual([])
+    expect(wrapper.state('vehicles')).toEqual([])
+    expect(wrapper.state('people')).toEqual([])
+    expect(wrapper.state('peopleAtrributes')).toEqual([])
+    expect(wrapper.state('planets')).toEqual([])
+  })
 
 })
 
@@ -40,19 +40,21 @@ describe('App functionality', () => {
   })
 
   const mockCalls = () => {
-    // console.log(mockedFilms)
     fetchMock.get('https://swapi.co/api/films', {
       status: 200,
       body: mockedFilms
     })
     fetchMock.get('https://swapi.co/api/people/', {
       status: 200,
+      people: mockedPeople
     })
     fetchMock.get('https://swapi.co/api/vehicles/', {
       status: 200,
+      vehicles: mockedVehicles
     })
     fetchMock.get('https://swapi.co/api/planets/', {
       status: 200,
+      planets: mockedPlanets
     })
   }
 
@@ -64,14 +66,14 @@ describe('App functionality', () => {
     })
   }
 
-  it('should have filmData after mounting', () => {
+  it('should have filmData after mounting', async () => {
     mockCalls()
     const wrapper = mount(<App />)
+    await wait()
+    const keys = Object.keys(wrapper.state('filmData'))
 
-    // const found = wrapper.find('App')
-    // const keys = Object.keys(found.state.filmData)
-    expect(true)
-    // expect(keys.length).toEqual(3)
+    expect(keys.length).toEqual(3)
+    expect(keys[1]).toEqual('title')
   })
 
 })
