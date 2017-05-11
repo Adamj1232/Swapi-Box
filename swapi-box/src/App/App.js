@@ -122,11 +122,28 @@ export default class App extends Component {
   }
 
   clickFavoriteSelect(e, objectData) {
-    console.log(objectData)
-    this.state.favorites.push(objectData)
-    this.setState({
-      favorites: this.state.favorites
-    })
+
+    let favs = this.state.favorites
+
+    if(favs.length === 0){
+      favs.push(objectData)
+      this.setState({
+        favorites: favs
+      })
+    } else {
+      let otherFavs = favs.map(val => {
+        return val.name
+      })
+      if(otherFavs.indexOf(objectData.name) === -1) {
+        favs.push(objectData)
+      } else {
+        let index = otherFavs.indexOf(objectData.name)
+        favs.splice(index, 1)
+      }
+      this.setState({
+        favorites: favs
+      })
+    }
   }
 
   componentWillMount() {
@@ -152,7 +169,7 @@ export default class App extends Component {
           onClick={(e) => {this.handleClick(e)}}
         >
           View Favorites
-          <span className='favorites-num'>?</span>
+          <span className='favorites-num'>{this.state.favorites.length}</span>
         </button>
         <section>
           <button
