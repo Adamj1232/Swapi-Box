@@ -160,15 +160,20 @@ export default class App extends Component {
 
   componentWillMount() {
     this.fetchFilms()
-    // this.fetchPeople()
-    // this.fetchVehicles()
-    // this.fetchPlanets()
   }
 
-  handleClick(e){
+  handleClick(e, cardName){
     this.setState({
       selected: e.target.value
     })
+  }
+
+  whatIsSelected(cardName){
+    if(this.state.selected === cardName){
+      return 'fetch-button selected'
+    } else {
+      return 'fetch-button'
+    }
   }
 
   render() {
@@ -176,7 +181,7 @@ export default class App extends Component {
       <div className="App">
         <h1>SwapiBox</h1>
         <button
-          className='favorites-top-btn'
+          className={this.whatIsSelected('favorites')}
           value='favorites'
           onClick={(e) => {this.handleClick(e)}}
         >
@@ -186,19 +191,19 @@ export default class App extends Component {
         <section>
           <button
             value='people'
-            className='fetch-button'
+            className={this.whatIsSelected('people')}
             onClick={(e) => {this.fetchPeople(e)}}
           >People</button>
 
           <button
             value='planets'
-            className='fetch-button'
+            className={this.whatIsSelected('planets')}
             onClick={(e) => {this.fetchPlanets(e)}}
           >Planets</button>
 
           <button
             value='vehicles'
-            className='fetch-button'
+            className={this.whatIsSelected('vehicles')}
             onClick={(e) => {this.fetchVehicles(e)}}
           >Vehicles</button>
 
