@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import './Card.css';
 
-export const Card = ({name, homeworld, species, population, selected, terrain, climate, residents, model, vehicleClass, passengers, cardOnClick}) => {
+export const Card = ({name, homeworld, species, population, selected, terrain, climate, residents, model, vehicleClass, passengers, cardOnClick, toggleButtonClass}) => {
   if ( selected === 'people'){
     return(
       <section className='card'>
