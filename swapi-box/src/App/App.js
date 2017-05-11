@@ -108,10 +108,11 @@ export default class App extends Component {
 
   fetchFilms() {
     return fetch('https://swapi.co/api/films')
-      .then((response) => response.json())
+      .then((response) => {
+        return response.json()})
       .then((json) => {
-        this.setState({ filmData: this.Cleaner.filmCleaner(json.results) })
-      })
+        return this.setState({ filmData: this.Cleaner.filmCleaner(json.results) })
+      }).catch(() => console.log('ERROr'))
   }
 
   buttonSelect(buttonName) {
@@ -151,9 +152,9 @@ export default class App extends Component {
 
   componentWillMount() {
     this.fetchFilms()
-    this.fetchPeople()
-    this.fetchVehicles()
-    this.fetchPlanets()
+    // this.fetchPeople()
+    // this.fetchVehicles()
+    // this.fetchPlanets()
   }
 
   handleClick(e){

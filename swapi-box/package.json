@@ -10,6 +10,7 @@
     "babel-plugin-transform-async-to-generator": "^6.24.1",
     "enzyme": "^2.8.2",
     "fetch-mock": "^5.10.0",
+    "locus": "^2.0.1",
     "react-addons-test-utils": "^15.5.1",
     "react-scripts": "0.9.5"
   },
