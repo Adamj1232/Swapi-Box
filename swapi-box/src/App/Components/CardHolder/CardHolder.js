@@ -6,7 +6,7 @@ export const CardHolder = ({selected, peopleData, planetData, vehicleData, peopl
   // if(selected === '' ){
   //   return <div>Loading....</div>
   //
-  if(peopleData.length === 0 || !planetData.length || !vehicleData.length ){
+  if(peopleData.length === 0 && !planetData.length && !vehicleData.length ){
     return <div>Loading....</div>
   } //only run when making all api calls
 

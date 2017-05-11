@@ -23,8 +23,10 @@ export default class App extends Component {
     }
   }
 
-  fetchVehicles() {
-    fetch('https://swapi.co/api/vehicles/')
+  fetchVehicles(e) {
+    this.handleClick(e)
+    if(!this.state.vehicles.length)
+    {fetch('https://swapi.co/api/vehicles/')
     .then( (response) => response.json())
     .then( json => {
       json.results.map( result => {
@@ -39,28 +41,31 @@ export default class App extends Component {
           vehicles: this.state.vehicles
         })
       })
-    })
+    }).catch(() => console.log('ERROr'))}
   }
 
-  fetchPlanets() {
-    fetch('https://swapi.co/api/planets/')
-    .then( response => response.json())
-    .then( json => {
-      json.results.map( results => {
-        let residentMap = results.residents.map( url => {
-          return this.getPeople(url)
-        })
-        Promise.all( residentMap ).then( values => {
-          let planetResidents = values.map( resident => {
-            return resident.name
+  fetchPlanets(e) {
+    this.handleClick(e)
+      if(!this.state.planets.length){
+      fetch('https://swapi.co/api/planets/')
+      .then( response => response.json())
+      .then( json => {
+        json.results.map( results => {
+          let residentMap = results.residents.map( url => {
+            return this.getPeople(url)
           })
-          this.arrangingPlanetState( results, values, planetResidents )
-          this.setState({
-            planets: this.state.planets
+          Promise.all( residentMap ).then( values => {
+            let planetResidents = values.map( resident => {
+              return resident.name
+            })
+            this.arrangingPlanetState( results, values, planetResidents )
+            this.setState({
+              planets: this.state.planets
+            })
           })
         })
       })
-    })
+    }
   }
 
   arrangingPlanetState(results, values, planetResidents){
@@ -77,27 +82,30 @@ export default class App extends Component {
     })
   }
 
-  fetchPeople() {
-    fetch('https://swapi.co/api/people/')
-    .then( response  => response.json())
-    .then( json => {
-      this.setState({ people: json.results })
-      json.results.map((result) => {
-        let homeworld2 = this.getPeople(result.homeworld)
-        let species2 = this.getPeople(result.species[0])
-        Promise.all([homeworld2, species2]).then((values)=>{
-          this.state.peopleAtrributes.push({
-            name2: result.name,
-            homeworld2: values[0].name,
-            species: values[1].name,
-            population2: values[0].population
-          })
-          this.setState({
-             peopleAtrributes: this.state.peopleAtrributes
+  fetchPeople(e) {
+    this.handleClick(e)
+    if(!this.state.people.length){
+      fetch('https://swapi.co/api/people/')
+      .then( response  => response.json())
+      .then( json => {
+        this.setState({ people: json.results })
+        json.results.map((result) => {
+          let homeworld2 = this.getPeople(result.homeworld)
+          let species2 = this.getPeople(result.species[0])
+          Promise.all([homeworld2, species2]).then((values)=>{
+            this.state.peopleAtrributes.push({
+              name2: result.name,
+              homeworld2: values[0].name,
+              species: values[1].name,
+              population2: values[0].population
+            })
+            this.setState({
+               peopleAtrributes: this.state.peopleAtrributes
+            })
           })
         })
       })
-    })
+    }
   }
 
   getPeople(url) {
@@ -179,19 +187,19 @@ export default class App extends Component {
           <button
             value='people'
             className='fetch-button'
-            onClick={(e) => {this.handleClick(e)}}
+            onClick={(e) => {this.fetchPeople(e)}}
           >People</button>
 
           <button
             value='planets'
             className='fetch-button'
-            onClick={(e) => {this.handleClick(e)}}
+            onClick={(e) => {this.fetchPlanets(e)}}
           >Planets</button>
 
           <button
             value='vehicles'
             className='fetch-button'
-            onClick={(e) => {this.handleClick(e)}}
+            onClick={(e) => {this.fetchVehicles(e)}}
           >Vehicles</button>
 
         </section>
