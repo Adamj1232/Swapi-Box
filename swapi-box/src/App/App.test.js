@@ -34,10 +34,10 @@ describe('App instantiation', () => {
 
 describe('App functionality', () => {
 
-  // afterEach(() => {
-  //   // expect(fetchMock.calls().unmatched).toEqual([])
-  //   fetchMock.restore()
-  // })
+  afterEach(() => {
+    // expect(fetchMock.calls().unmatched).toEqual([])
+    fetchMock.restore()
+  })
 
   const mockCalls = () => {
     fetchMock.get('https://swapi.co/api/films', {
@@ -46,15 +46,13 @@ describe('App functionality', () => {
     })
     fetchMock.get('https://swapi.co/api/people/', {
       status: 200,
-      people: mockedPeople
+      body: mockedPeople
     })
     fetchMock.get('https://swapi.co/api/vehicles/', {
       status: 200,
-      vehicles: mockedVehicles
     })
     fetchMock.get('https://swapi.co/api/planets/', {
       status: 200,
-      planets: mockedPlanets
     })
   }
 
@@ -70,23 +68,23 @@ describe('App functionality', () => {
     mockCalls()
     const wrapper = mount(<App />)
     await wait()
-    const keys = Object.keys(wrapper.state('filmData'))
-    // console.log(mockedFilms)
-    expect(keys[1]).toEqual('title')
-    expect(keys.length).toEqual(3)
+
+    .then(() => {
+      let keys = Object.keys(wrapper.state('filmData'))
+     console.log(wrapper.state('filmData'))
+     expect(keys[1]).toEqual('title')
+     expect(keys.length).toEqual(3)
+    })
   })
 
   it('should have vehicleData after mounting', async () => {
-    // console.log(mockedVehicles)
+    console.log(mockedVehicles)
     mockCalls()
     const wrapper = mount(<App />)
     await wait()
-    // const keys = Object.keys(wrapper.state('vehicles'))
 
     console.log(wrapper.state('planets'))
-
-    // expect(keys.length).toEqual(3)
-    // expect(wrapper.state('vehicles').results.length).toEqual(10)
+    expect(wrapper.state('vehicles').results.length).toEqual(0)
   })
 
 })
