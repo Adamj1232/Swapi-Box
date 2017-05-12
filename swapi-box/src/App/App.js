@@ -241,6 +241,6 @@ export default class App extends Component {
           />
         </section>
       </div>
-    );
+    )
   }
 }
