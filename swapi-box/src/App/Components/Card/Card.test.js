@@ -28,6 +28,5 @@ describe('Card instantiation', () => {
                         cardOnClick={mockFn}
                         toggleButtonClass={mockFn}
                     />, div)
-    // expect(true)
   })
 })

@@ -2,7 +2,7 @@ body {
   margin: 0;
   padding: 0;
   /*font-family: sans-serif;*/
-  background-color: black;
+  background-image: url('https://lc-www-live-s.legocdn.com/r/www/r/catalogs/-/media/catalogs/activities/star%20wars/2016/backgrounds/lsw_activities_backgrounds_starfield_primary.jpg?l.r2=-1377126531');
   color: yellow;
   font-family: 'Rubik Mono One', sans-serif;
   /* Force the body to fill the entire screen */
@@ -10,8 +10,6 @@ body {
   height: 100%;
   /* Hide elements that flow outside the viewable space */
   /*overflow: hidden;*/
-  /* Black background for the screen */
-  background: #000;
 }
 
 /*
@@ -86,4 +84,8 @@ body {
 
 button {
   margin: 5px;
+  border: 0;
+  -moz-box-shadow: 0 0 3px 3px white;
+  -webkit-box-shadow: 0 0 3px 3px white;
+  box-shadow: 0 0 3px 3px white;
 }
