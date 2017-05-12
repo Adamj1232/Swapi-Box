@@ -2,18 +2,19 @@ import React, { Component } from 'react'
 import './Card.css';
 import PropTypes from 'prop-types'
 
-export const Card = ({name, homeworld, species, population, selected, terrain, climate, residents, model, vehicleClass, passengers, cardOnClick, toggleButtonClass, favSelected}) => {
+export const Card = ({name, homeworld, species, population, selected, terrain, climate, residents, model, vehicleClass, passengers, cardOnClick}) => {
   if ( selected === 'people'){
-    console.log(favSelected, name)
     return(
       <section className='card'>
         <div className='top-info'>
           <h3>{name}</h3>
-          <button className={favSelected} onClick={(e) => {cardOnClick(e, {name, species, homeworld, population, selected})}}>favorites</button>
+          <button onClick={(e) => {cardOnClick(e, {name, species, homeworld, population, selected})}}>favorites</button>
         </div>
-        <div>Species: {species}</div>
-        <div>Homeworld: {homeworld}</div>
-        <div>Population: {population}</div>
+        <section className='bottom-info'>
+          <div>Species: {species}</div>
+          <div>Homeworld: {homeworld}</div>
+          <div>Population: {population}</div>
+        </section>
       </section>
     )
   } else if ( selected === 'planets'){
@@ -21,12 +22,14 @@ export const Card = ({name, homeworld, species, population, selected, terrain, c
       <section className='card'>
         <div className='top-info'>
           <h3>{name}</h3>
-          <button className={favSelected} onClick={(e) => {cardOnClick(e, {name, terrain, population, climate, residents, selected})}}>favorites</button>
+          <button onClick={(e) => {cardOnClick(e, {name, terrain, population, climate, residents, selected})}}>favorites</button>
         </div>
-        <div>Terrain: {terrain}</div>
-        <div>Population: {population}</div>
-        <div>Climate: {climate}</div>
-        <div>Residents: {residents}</div>
+        <section className='bottom-info'>
+          <div>Terrain: {terrain}</div>
+          <div>Population: {population}</div>
+          <div>Climate: {climate}</div>
+          <div>Residents: {residents}</div>
+        </section>
       </section>
     )
   } else if ( selected === 'vehicles'){
@@ -34,11 +37,13 @@ export const Card = ({name, homeworld, species, population, selected, terrain, c
       <section className='card'>
         <div className='top-info'>
           <h3>{name}</h3>
-          <button className={favSelected} onClick={(e) => {cardOnClick(e, {name, model, vehicleClass, passengers, selected})}}>favorites</button>
+          <button onClick={(e) => {cardOnClick(e, {name, model, vehicleClass, passengers, selected})}}>favorites</button>
         </div>
-        <div>Model: {model}</div>
-        <div>Class: {vehicleClass}</div>
-        <div>Passengers: {passengers}</div>
+        <section className='bottom-info'>
+          <div>Model: {model}</div>
+          <div>Class: {vehicleClass}</div>
+          <div>Passengers: {passengers}</div>
+        </section>
       </section>
     )
   } else {

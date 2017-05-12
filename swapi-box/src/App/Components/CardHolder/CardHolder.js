@@ -3,21 +3,11 @@ import { Card } from '../Card/Card.js'
 import './CardHolder.css';
 import PropTypes from 'prop-types'
 
-export const CardHolder = ({selected, peopleData, planetData, vehicleData, peopleAtrributes, handleFavoriteSelect, favoriteCards, btnSelected}) => {
+export const CardHolder = ({selected, peopleData, planetData, vehicleData, peopleAtrributes, handleFavoriteSelect, favoriteCards}) => {
 
   if(selected === 'people'){
   let people = peopleAtrributes.map((person) => {
-    //  let faved
-    //   if(favoriteCards.length > 0){
-    //     favoriteCards.map(val => {
-    //     if(person.name2 === val.name) {
-    //       console.log(person.name2)
-    //       console.log(val.name)
-    //       return faved = 'fav'
-    //     } else {
-    //       return faved = ''
-    //     }
-    //   })}
+
     return(
       <Card
         className='card'
@@ -28,7 +18,6 @@ export const CardHolder = ({selected, peopleData, planetData, vehicleData, peopl
         key={person.name2}
         selected={selected}
         cardOnClick={handleFavoriteSelect}
-        // favSelected={faved}
       />
     )
   })
@@ -51,7 +40,6 @@ export const CardHolder = ({selected, peopleData, planetData, vehicleData, peopl
           key={planet.name}
           selected={selected}
           cardOnClick={handleFavoriteSelect}
-          favSelected={btnSelected(planet.name)}
         />
       )
     })
@@ -73,7 +61,6 @@ export const CardHolder = ({selected, peopleData, planetData, vehicleData, peopl
           key={vehicle.name}
           selected={selected}
           cardOnClick={handleFavoriteSelect}
-          favSelected={btnSelected(vehicle.name)}
         />
       )
     })
@@ -103,7 +90,6 @@ export const CardHolder = ({selected, peopleData, planetData, vehicleData, peopl
           key={favoriteCard.name}
           selected={favoriteCard.selected}
           cardOnClick={handleFavoriteSelect}
-          toggleButtonClass={btnSelected}
           favSelected='fav'
         />
       )
