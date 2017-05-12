@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import './App.css';
+import React, { Component } from 'react'
+import './App.css'
 import { Scroll } from './Components/Scroll/Scroll.js'
 import { Card } from './Components/Card/Card.js'
 import { CardHolder } from './Components/CardHolder/CardHolder.js'

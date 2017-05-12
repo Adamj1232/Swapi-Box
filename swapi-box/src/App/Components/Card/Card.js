@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import './Card.css';
+import './Card.css'
 import PropTypes from 'prop-types'
 
 export const Card = ({name, homeworld, species, population, selected, terrain, climate, residents, model, vehicleClass, passengers, cardOnClick, favSelected}) => {
