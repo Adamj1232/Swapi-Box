@@ -137,7 +137,7 @@ export default class App extends Component {
     let favs = this.state.favorites
 
     if(favs.length === 0){
-      e.currentTarget.className = 'fav'
+      // e.currentTarget.className = 'fav'
       favs.push(objectData)
       this.setState({
         favorites: favs
@@ -147,11 +147,11 @@ export default class App extends Component {
         return val.name
       })
       if(otherFavs.indexOf(objectData.name) === -1) {
-        e.currentTarget.className = 'fav'
+        // e.currentTarget.className = 'fav'
         favs.push(objectData)
       } else {
         let index = otherFavs.indexOf(objectData.name)
-        e.currentTarget.className = ''
+        // e.currentTarget.className = ''
         favs.splice(index, 1)
       }
       this.setState({
@@ -179,14 +179,17 @@ export default class App extends Component {
   }
 
   isSelected(card){
-    let favs = this.state.favorites
-      favs.map(val => {
+    console.log('working')
+    if(this.state.favorites.length > 0){
+      this.state.favorites.map(val => {
       if(card.name === val.name) {
+        console.log(card.name)
+        console.log(val.name)
         return 'fav'
       } else {
         return ''
       }
-    })
+    })}
   }
 
   render() {
@@ -233,7 +236,7 @@ export default class App extends Component {
           peopleAtrributes={this.state.peopleAtrributes}
           handleFavoriteSelect={this.clickFavoriteSelect.bind(this)}
           favoriteCards={this.state.favorites}
-          btnSelected={this.isSelected}
+          btnSelected={this.isSelected.bind(this)}
         />
       </div>
     );

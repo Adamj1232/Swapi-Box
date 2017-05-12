@@ -24,6 +24,5 @@ describe('CardHolder instantiation', () => {
                     btnSelected={mockFn}
 
                     />, div)
-    // expect(true)
   })
 })

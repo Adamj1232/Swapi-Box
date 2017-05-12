@@ -24,3 +24,7 @@
 .top-info button{
   align-self: flex-end;
 }
+
+.fav {
+  background-color: green;
+}
