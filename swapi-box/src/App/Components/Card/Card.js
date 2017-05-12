@@ -2,13 +2,13 @@ import React, { Component } from 'react'
 import './Card.css';
 import PropTypes from 'prop-types'
 
-export const Card = ({name, homeworld, species, population, selected, terrain, climate, residents, model, vehicleClass, passengers, cardOnClick}) => {
+export const Card = ({name, homeworld, species, population, selected, terrain, climate, residents, model, vehicleClass, passengers, cardOnClick, favSelected}) => {
   if ( selected === 'people'){
     return(
       <section className='card'>
         <div className='top-info'>
           <h3>{name}</h3>
-          <button onClick={(e) => {cardOnClick(e, {name, species, homeworld, population, selected})}}>favorite</button>
+          <button className={favSelected} onClick={(e) => {cardOnClick(e, {name, species, homeworld, population, selected})}}>favorite</button>
         </div>
         <section className='bottom-info'>
           <div>Species: {species}</div>
@@ -22,7 +22,7 @@ export const Card = ({name, homeworld, species, population, selected, terrain, c
       <section className='card'>
         <div className='top-info'>
           <h3>{name}</h3>
-          <button onClick={(e) => {cardOnClick(e, {name, terrain, population, climate, residents, selected})}}>favorite</button>
+          <button className={favSelected} onClick={(e) => {cardOnClick(e, {name, terrain, population, climate, residents, selected})}}>favorite</button>
         </div>
         <section className='bottom-info'>
           <div>Terrain: {terrain}</div>
@@ -37,7 +37,7 @@ export const Card = ({name, homeworld, species, population, selected, terrain, c
       <section className='card'>
         <div className='top-info'>
           <h3>{name}</h3>
-          <button onClick={(e) => {cardOnClick(e, {name, model, vehicleClass, passengers, selected})}}>favorite</button>
+          <button className={favSelected} onClick={(e) => {cardOnClick(e, {name, model, vehicleClass, passengers, selected})}}>favorite</button>
         </div>
         <section className='bottom-info'>
           <div>Model: {model}</div>
