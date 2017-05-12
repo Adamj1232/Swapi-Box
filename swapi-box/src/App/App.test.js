@@ -5,31 +5,31 @@ import fetchMock from 'fetch-mock'
 import { shallow, mount } from 'enzyme'
 import { mockedFilms, mockedPeople, mockedVehicles, mockedPlanets } from '../TestData'
 
-// describe('App instantiation', () => {
-//
-//
-//   it('renders without crashing', () => {
-//     const div = document.createElement('div')
-//     ReactDOM.render(<App />, div)
-//
-//   })
-//
-//   it('should have initial states start empty values',  () => {
-//
-//     const wrapper = mount(<App />)
-//
-//     // await wrapper.update()
-//
-//     expect(wrapper.state('filmData')).toEqual({})
-//     expect(wrapper.state('selected')).toEqual('')
-//     expect(wrapper.state('favorites')).toEqual([])
-//     expect(wrapper.state('vehicles')).toEqual([])
-//     expect(wrapper.state('people')).toEqual([])
-//     expect(wrapper.state('peopleAtrributes')).toEqual([])
-//     expect(wrapper.state('planets')).toEqual([])
-//   })
-//
-// })
+describe('App instantiation', () => {
+
+
+  it('renders without crashing', () => {
+    const div = document.createElement('div')
+    ReactDOM.render(<App />, div)
+
+  })
+
+  it('should have initial states start empty values',  () => {
+
+    const wrapper = mount(<App />)
+
+    // await wrapper.update()
+
+    expect(wrapper.state('filmData')).toEqual({})
+    expect(wrapper.state('selected')).toEqual('')
+    expect(wrapper.state('favorites')).toEqual([])
+    expect(wrapper.state('vehicles')).toEqual([])
+    expect(wrapper.state('people')).toEqual([])
+    expect(wrapper.state('peopleAtrributes')).toEqual([])
+    expect(wrapper.state('planets')).toEqual([])
+  })
+
+})
 
 describe('App functionality', () => {
 

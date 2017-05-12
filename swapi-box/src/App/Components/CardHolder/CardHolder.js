@@ -1,6 +1,8 @@
 import React from 'react'
-import {Card} from '../Card/Card.js'
+import { Card } from '../Card/Card.js'
 import './CardHolder.css';
+import PropTypes from 'prop-types'
+
 
 export const CardHolder = ({selected, peopleData, planetData, vehicleData, peopleAtrributes, handleFavoriteSelect, favoriteCards, btnSelected}) => {
 
@@ -109,4 +111,15 @@ export const CardHolder = ({selected, peopleData, planetData, vehicleData, peopl
   return (
     <section></section>
   )
+}
+
+CardHolder.propTypes = {
+  selected: PropTypes.string,
+  peopleData: PropTypes.array,
+  planetData: PropTypes.array,
+  vehicleData: PropTypes.array,
+  peopleAtrributes: PropTypes.array,
+  handleFavoriteSelect: PropTypes.func,
+  favoriteCards: PropTypes.array,
+  btnSelected: PropTypes.func,
 }
