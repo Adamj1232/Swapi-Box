@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 export const Scroll = ({scrollData}) => {
   if(scrollData.length === 0){
@@ -14,4 +15,8 @@ export const Scroll = ({scrollData}) => {
       <p className='widen'>{scrollData.crawl}</p>
     </section>
   )
+}
+
+Scroll.propTypes = {
+  scrollData: PropTypes.object
 }

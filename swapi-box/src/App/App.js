@@ -204,19 +204,19 @@ export default class App extends Component {
         <section>
           <button
             value='people'
-            className={this.whatIsSelected('people')}
+            className={`${this.whatIsSelected('people')} peopleBtn`}
             onClick={(e) => {this.fetchPeople(e)}}
           >People</button>
 
           <button
             value='planets'
-            className={this.whatIsSelected('planets')}
+            className={`${this.whatIsSelected('planets')} planetsBtn`}
             onClick={(e) => {this.fetchPlanets(e)}}
           >Planets</button>
 
           <button
             value='vehicles'
-            className={this.whatIsSelected('vehicles')}
+            className={`${this.whatIsSelected('vehicles')} vehiclesBtn`}
             onClick={(e) => {this.fetchVehicles(e)}}
           >Vehicles</button>
 

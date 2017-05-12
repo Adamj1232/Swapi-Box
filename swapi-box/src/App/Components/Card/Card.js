@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import './Card.css';
+import PropTypes from 'prop-types'
+
 
 export const Card = ({name, homeworld, species, population, selected, terrain, climate, residents, model, vehicleClass, passengers, cardOnClick, toggleButtonClass}) => {
   if ( selected === 'people'){
@@ -46,10 +48,16 @@ export const Card = ({name, homeworld, species, population, selected, terrain, c
   }
 }
 
-// function wait(){
-//   return new Promise(resolve => {
-//     setTimeout(() => {
-//       resolve()
-//     }, 2000)
-//   })
-// }
+Card.propTypes = {
+  name: PropTypes.string,
+  homeworld: PropTypes.string,
+  species: PropTypes.string,
+  population: PropTypes.string,
+  terrain: PropTypes.string,
+  climate: PropTypes.string,
+  model: PropTypes.string,
+  vehicleClass: PropTypes.string,
+  passengers: PropTypes.string,
+  cardOnClick: PropTypes.func,
+  toggleButtonClass: PropTypes.func,
+}
