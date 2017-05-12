@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Card from './Card'
+import {Card} from './Card'
 import fetchMock from 'fetch-mock'
 import { shallow, mount } from 'enzyme'
 
@@ -9,22 +9,22 @@ import { shallow, mount } from 'enzyme'
 describe('Card instantiation', () => {
 
 
-  it.skip('renders without crashing', () => {
+  it('renders without crashing', () => {
     var mockFn = jest.fn()
 
     const div = document.createElement('div')
     ReactDOM.render(<Card
-                        name={mockFn}
-                        homeworld={mockFn}
-                        species={mockFn}
-                        population={mockFn}
-                        selected={mockFn}
-                        terrain={mockFn}
-                        climate={mockFn}
-                        residents={mockFn}
-                        model={mockFn}
-                        vehicleClass={mockFn}
-                        passengers={mockFn}
+                        name={'mockFn'}
+                        homeworld={'mockFn'}
+                        species={'mockFn'}
+                        population={'mockFn'}
+                        selected={'mockFn'}
+                        terrain={'mockFn'}
+                        climate={'mockFn'}
+                        residents={'mockFn'}
+                        model={'mockFn'}
+                        vehicleClass={'mockFn'}
+                        passengers={'mockFn'}
                         cardOnClick={mockFn}
                         toggleButtonClass={mockFn}
                     />, div)
