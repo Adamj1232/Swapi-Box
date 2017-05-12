@@ -222,20 +222,24 @@ export default class App extends Component {
           >Vehicles</button>
 
         </section>
-        <div className='fade'></div>
-        <section className='star-wars'>
-          <Scroll scrollData={this.state.filmData}/>
+        <section className="bottom-wrap">
+          <div className='scroll-wrap'>
+            <div className='fade'></div>
+            <section className='star-wars'>
+              <Scroll scrollData={this.state.filmData}/>
+            </section>
+          </div>
+          <CardHolder
+            selected={this.state.selected}
+            peopleData={this.state.people}
+            planetData={this.state.planets}
+            vehicleData={this.state.vehicles}
+            peopleAtrributes={this.state.peopleAtrributes}
+            handleFavoriteSelect={this.clickFavoriteSelect.bind(this)}
+            favoriteCards={this.state.favorites}
+            btnSelected={this.isSelected.bind(this)}
+          />
         </section>
-        <CardHolder
-          selected={this.state.selected}
-          peopleData={this.state.people}
-          planetData={this.state.planets}
-          vehicleData={this.state.vehicles}
-          peopleAtrributes={this.state.peopleAtrributes}
-          handleFavoriteSelect={this.clickFavoriteSelect.bind(this)}
-          favoriteCards={this.state.favorites}
-          btnSelected={this.isSelected.bind(this)}
-        />
       </div>
     );
   }
