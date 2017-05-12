@@ -51,6 +51,10 @@ describe('App functionality', () => {
       status: 200,
       body: mockedVehicles
     })
+    fetchMock.get('https://swapi.co/api/planets/', {
+      status: 200,
+      body: mockedPlanets
+    })
     fetchMock.get('*', {
       status: 200,
       body: mockedPlanets
@@ -97,26 +101,29 @@ describe('App functionality', () => {
     mockCalls()
     const wrapper = mount(<App />)
     expect(wrapper.state('vehicles')).toEqual([])
+    const fBtn = wrapper.find('button').last()
+
+    fBtn.simulate('click')
 
     await wait()
 
     expect(fetchMock.called()).toEqual(true)
     expect(wrapper.state('vehicles')[0]).toHaveProperty('passengers')
-
-    expect(fetchMock.lastUrl()).toEqual('https://swapi.co/api/vehicles/')
   })
 
-  // it('should have peopleData after mounting', async () => {
-  //   mockCalls()
-  //   const wrapper = mount(<App />)
-  //   expect(wrapper.state('vehicles')).toEqual([])
-  //
-  //   await wait()
-  //
-  //   expect(fetchMock.called()).toEqual(true)
-  //   expect(wrapper.state('vehicles')[0]).toHaveProperty('passengers')
-  //
-  //   expect(fetchMock.lastUrl()).toEqual('https://swapi.co/api/vehicles/')
-  // })
+  it('should have peopleData after mounting', async () => {
+    mockCalls()
+    const wrapper = mount(<App />)
+    expect(wrapper.state('peopleAtrributes')).toEqual([])
+    const fBtn2 = wrapper.find('.peopleBtn')
+
+    fBtn2.simulate('click')
+
+    await wait()
+
+    expect(fetchMock.called()).toEqual(true)
+    expect(wrapper.state('peopleAtrributes')[0]).toHaveProperty('name2')
+
+  })
 
 })
