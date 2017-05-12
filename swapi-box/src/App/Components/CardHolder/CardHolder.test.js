@@ -24,6 +24,7 @@ describe('CardHolder instantiation', () => {
                     btnSelected={mockFn}
 
                     />, div)
+
   })
 
   it('should display a CardHolder', () => {
@@ -57,7 +58,7 @@ describe('CardHolder instantiation', () => {
     const found = wrapper.find('.card')
     expect(found.length).toEqual(3)
   })
-  
+
   it('should have cards for people', () => {
     var mockFn = jest.fn()
     const wrapper = mount(<CardHolder

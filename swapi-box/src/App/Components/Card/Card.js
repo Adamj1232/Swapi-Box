@@ -2,14 +2,14 @@ import React, { Component } from 'react'
 import './Card.css';
 import PropTypes from 'prop-types'
 
-
-export const Card = ({name, homeworld, species, population, selected, terrain, climate, residents, model, vehicleClass, passengers, cardOnClick, toggleButtonClass}) => {
+export const Card = ({name, homeworld, species, population, selected, terrain, climate, residents, model, vehicleClass, passengers, cardOnClick, toggleButtonClass, favSelected}) => {
   if ( selected === 'people'){
+    console.log(favSelected, name)
     return(
       <section className='card'>
         <div className='top-info'>
           <h3>{name}</h3>
-          <button onClick={(e) => {cardOnClick(e, {name, species, homeworld, population, selected})}}>favorites</button>
+          <button className={favSelected} onClick={(e) => {cardOnClick(e, {name, species, homeworld, population, selected})}}>favorites</button>
         </div>
         <div>Species: {species}</div>
         <div>Homeworld: {homeworld}</div>
@@ -21,7 +21,7 @@ export const Card = ({name, homeworld, species, population, selected, terrain, c
       <section className='card'>
         <div className='top-info'>
           <h3>{name}</h3>
-          <button onClick={(e) => {cardOnClick(e, {name, terrain, population, climate, residents, selected})}}>favorites</button>
+          <button className={favSelected} onClick={(e) => {cardOnClick(e, {name, terrain, population, climate, residents, selected})}}>favorites</button>
         </div>
         <div>Terrain: {terrain}</div>
         <div>Population: {population}</div>
@@ -34,7 +34,7 @@ export const Card = ({name, homeworld, species, population, selected, terrain, c
       <section className='card'>
         <div className='top-info'>
           <h3>{name}</h3>
-          <button onClick={(e) => {cardOnClick(e, {name, model, vehicleClass, passengers, selected})}}>favorites</button>
+          <button className={favSelected} onClick={(e) => {cardOnClick(e, {name, model, vehicleClass, passengers, selected})}}>favorites</button>
         </div>
         <div>Model: {model}</div>
         <div>Class: {vehicleClass}</div>

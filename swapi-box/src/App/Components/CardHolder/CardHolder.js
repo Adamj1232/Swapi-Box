@@ -3,15 +3,21 @@ import { Card } from '../Card/Card.js'
 import './CardHolder.css';
 import PropTypes from 'prop-types'
 
-
 export const CardHolder = ({selected, peopleData, planetData, vehicleData, peopleAtrributes, handleFavoriteSelect, favoriteCards, btnSelected}) => {
-
-  if(!peopleData.length && !planetData.length && !vehicleData.length ){
-    return <div>Loading....</div>
-  } //only run when making all api calls
 
   if(selected === 'people'){
   let people = peopleAtrributes.map((person) => {
+    //  let faved
+    //   if(favoriteCards.length > 0){
+    //     favoriteCards.map(val => {
+    //     if(person.name2 === val.name) {
+    //       console.log(person.name2)
+    //       console.log(val.name)
+    //       return faved = 'fav'
+    //     } else {
+    //       return faved = ''
+    //     }
+    //   })}
     return(
       <Card
         className='card'
@@ -22,7 +28,7 @@ export const CardHolder = ({selected, peopleData, planetData, vehicleData, peopl
         key={person.name2}
         selected={selected}
         cardOnClick={handleFavoriteSelect}
-        toggleButtonClass={btnSelected}
+        // favSelected={faved}
       />
     )
   })
@@ -45,7 +51,7 @@ export const CardHolder = ({selected, peopleData, planetData, vehicleData, peopl
           key={planet.name}
           selected={selected}
           cardOnClick={handleFavoriteSelect}
-          toggleButtonClass={btnSelected}
+          favSelected={btnSelected(planet.name)}
         />
       )
     })
@@ -67,7 +73,7 @@ export const CardHolder = ({selected, peopleData, planetData, vehicleData, peopl
           key={vehicle.name}
           selected={selected}
           cardOnClick={handleFavoriteSelect}
-          toggleButtonClass={btnSelected}
+          favSelected={btnSelected(vehicle.name)}
         />
       )
     })
@@ -81,7 +87,7 @@ export const CardHolder = ({selected, peopleData, planetData, vehicleData, peopl
     let favorites = favoriteCards.map((favoriteCard) => {
       return(
         <Card
-          className='card'
+          className='card fav'
           name={favoriteCard.name}
           homeworld={favoriteCard.homeworld}
           species={favoriteCard.species}
@@ -98,6 +104,7 @@ export const CardHolder = ({selected, peopleData, planetData, vehicleData, peopl
           selected={favoriteCard.selected}
           cardOnClick={handleFavoriteSelect}
           toggleButtonClass={btnSelected}
+          favSelected='fav'
         />
       )
     })

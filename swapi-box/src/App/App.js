@@ -177,14 +177,17 @@ export default class App extends Component {
   }
 
   isSelected(card){
-    let favs = this.state.favorites
-      favs.map(val => {
+    console.log('working')
+    if(this.state.favorites.length > 0){
+      this.state.favorites.map(val => {
       if(card.name === val.name) {
+        console.log(card.name)
+        console.log(val.name)
         return 'fav'
       } else {
         return ''
       }
-    })
+    })}
   }
 
   render() {
@@ -199,7 +202,7 @@ export default class App extends Component {
           View Favorites
           <span className='favorites-num'>{this.state.favorites.length}</span>
         </button>
-        <section>
+        <section className='header-btn'>
           <button
             value='people'
             className={`${this.whatIsSelected('people')} peopleBtn`}
@@ -231,7 +234,7 @@ export default class App extends Component {
           peopleAtrributes={this.state.peopleAtrributes}
           handleFavoriteSelect={this.clickFavoriteSelect.bind(this)}
           favoriteCards={this.state.favorites}
-          btnSelected={this.isSelected}
+          btnSelected={this.isSelected.bind(this)}
         />
       </div>
     );

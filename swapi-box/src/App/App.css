@@ -35,3 +35,10 @@ button {
   background-color: #2F67F8;
   color: #FFFAFA;
 }
+
+.favorites-num {
+  background-color: #1d59f2;
+  margin: 1px 3px 0 10px;
+  border: 1px solid white;
+  padding: 0 5px;
+}

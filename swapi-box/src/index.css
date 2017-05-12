@@ -89,3 +89,7 @@ button {
   -webkit-box-shadow: 0 0 3px 3px white;
   box-shadow: 0 0 3px 3px white;
 }
+
+.header-btn button {
+  margin: 15px 30px;
+}
