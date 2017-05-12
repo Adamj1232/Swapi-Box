@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import { Scroll } from './Components/Scroll/Scroll.js'
-import { Button } from './Components/Button/Button.js'
 import { Card } from './Components/Card/Card.js'
 import { CardHolder } from './Components/CardHolder/CardHolder.js'
-import { Favorites } from './Components/Favorites/Favorites.js'
 import Cleaner from './helpers/Cleaner.js'
 
 export default class App extends Component {
@@ -137,7 +135,7 @@ export default class App extends Component {
     let favs = this.state.favorites
 
     if(favs.length === 0){
-      // e.currentTarget.className = 'fav'
+      e.currentTarget.className = 'fav'
       favs.push(objectData)
       this.setState({
         favorites: favs
@@ -147,11 +145,11 @@ export default class App extends Component {
         return val.name
       })
       if(otherFavs.indexOf(objectData.name) === -1) {
-        // e.currentTarget.className = 'fav'
+        e.currentTarget.className = 'fav'
         favs.push(objectData)
       } else {
         let index = otherFavs.indexOf(objectData.name)
-        // e.currentTarget.className = ''
+        e.currentTarget.className = ''
         favs.splice(index, 1)
       }
       this.setState({
@@ -204,7 +202,7 @@ export default class App extends Component {
           View Favorites
           <span className='favorites-num'>{this.state.favorites.length}</span>
         </button>
-        <section>
+        <section className='header-btn'>
           <button
             value='people'
             className={`${this.whatIsSelected('people')} peopleBtn`}

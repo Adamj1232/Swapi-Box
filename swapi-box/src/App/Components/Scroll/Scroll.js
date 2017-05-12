@@ -2,8 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 export const Scroll = ({scrollData}) => {
-  if(scrollData.length === 0){
-    return <div>Loading....</div>
+  while(!scrollData.title){
+    return <h3>Loading....</h3>
   }
 
   return (

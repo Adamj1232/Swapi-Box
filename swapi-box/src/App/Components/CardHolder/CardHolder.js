@@ -7,17 +7,17 @@ export const CardHolder = ({selected, peopleData, planetData, vehicleData, peopl
 
   if(selected === 'people'){
   let people = peopleAtrributes.map((person) => {
-     let faved
-      if(favoriteCards.length > 0){
-        favoriteCards.map(val => {
-        if(person.name2 === val.name) {
-          console.log(person.name2)
-          console.log(val.name)
-          return faved = 'fav'
-        } else {
-          return faved = ''
-        }
-      })}
+    //  let faved
+    //   if(favoriteCards.length > 0){
+    //     favoriteCards.map(val => {
+    //     if(person.name2 === val.name) {
+    //       console.log(person.name2)
+    //       console.log(val.name)
+    //       return faved = 'fav'
+    //     } else {
+    //       return faved = ''
+    //     }
+    //   })}
     return(
       <Card
         className='card'
@@ -28,7 +28,7 @@ export const CardHolder = ({selected, peopleData, planetData, vehicleData, peopl
         key={person.name2}
         selected={selected}
         cardOnClick={handleFavoriteSelect}
-        favSelected={faved}
+        // favSelected={faved}
       />
     )
   })

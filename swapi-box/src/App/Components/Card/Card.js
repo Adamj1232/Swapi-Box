@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 
 export const Card = ({name, homeworld, species, population, selected, terrain, climate, residents, model, vehicleClass, passengers, cardOnClick, toggleButtonClass, favSelected}) => {
   if ( selected === 'people'){
+    console.log(favSelected, name)
     return(
       <section className='card'>
         <div className='top-info'>
