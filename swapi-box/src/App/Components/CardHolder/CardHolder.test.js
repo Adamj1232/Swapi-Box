@@ -24,7 +24,6 @@ describe('CardHolder instantiation', () => {
                     btnSelected={mockFn}
 
                     />, div)
-
   })
 
   it('should display a CardHolder', () => {
