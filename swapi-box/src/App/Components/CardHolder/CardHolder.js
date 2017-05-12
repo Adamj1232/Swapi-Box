@@ -1,6 +1,6 @@
 import React from 'react'
 import { Card } from '../Card/Card.js'
-import './CardHolder.css';
+import './CardHolder.css'
 import PropTypes from 'prop-types'
 
 export const CardHolder = ({selected, peopleData, planetData, vehicleData, peopleAtrributes, handleFavoriteSelect, favoriteCards}) => {

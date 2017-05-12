@@ -82,4 +82,4 @@ describe('Card instantiation', () => {
      expect(wrapper.node.props.climate).toEqual('temperate')
      expect(wrapper.node.props.selected).toEqual('planet')
   })
-});
+})
