@@ -12,6 +12,7 @@ export const CardHolder = ({selected, peopleData, planetData, vehicleData, peopl
   let people = peopleAtrributes.map((person) => {
     return(
       <Card
+        className='card'
         name={person.name2}
         homeworld={person.homeworld2}
         species={person.species}
@@ -33,6 +34,7 @@ export const CardHolder = ({selected, peopleData, planetData, vehicleData, peopl
     let planets = planetData.map((planet) => {
       return(
         <Card
+          className='card'
           name={planet.name}
           terrain={planet.terrain}
           population={planet.population}
@@ -55,6 +57,7 @@ export const CardHolder = ({selected, peopleData, planetData, vehicleData, peopl
     let vehicles = vehicleData.map((vehicle) => {
       return(
         <Card
+          className='card'
           name={vehicle.name}
           model={vehicle.model}
           vehicleClass={vehicle.class}
@@ -76,6 +79,7 @@ export const CardHolder = ({selected, peopleData, planetData, vehicleData, peopl
     let favorites = favoriteCards.map((favoriteCard) => {
       return(
         <Card
+          className='card'
           name={favoriteCard.name}
           homeworld={favoriteCard.homeworld}
           species={favoriteCard.species}

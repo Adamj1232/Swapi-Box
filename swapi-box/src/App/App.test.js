@@ -111,6 +111,7 @@ describe('App functionality', () => {
     expect(wrapper.state('vehicles')[0]).toHaveProperty('passengers')
   })
 
+
   it('should have peopleData after mounting', async () => {
     mockCalls()
     const wrapper = mount(<App />)
@@ -123,7 +124,76 @@ describe('App functionality', () => {
 
     expect(fetchMock.called()).toEqual(true)
     expect(wrapper.state('peopleAtrributes')[0]).toHaveProperty('name2')
+  })
 
+  it('should have people cards after mounting', async () => {
+    mockCalls()
+    const wrapper = mount(<App />)
+    expect(wrapper.state('peopleAtrributes')).toEqual([])
+    const fBtn2 = wrapper.find('.peopleBtn')
+
+    fBtn2.simulate('click')
+
+    await wait()
+    const found = wrapper.find('.card')
+    expect(fetchMock.called()).toEqual(true)
+    expect(found.length).toEqual(3)
+  })
+
+  it('should have vehicleData after mounting', async () => {
+    mockCalls()
+    const wrapper = mount(<App />)
+    expect(wrapper.state('vehicles')).toEqual([])
+    const fBtn3 = wrapper.find('.vehiclesBtn')
+
+    fBtn3.simulate('click')
+
+    await wait()
+
+    expect(fetchMock.called()).toEqual(true)
+    expect(wrapper.state('vehicles')[0]).toHaveProperty('name')
+  })
+
+  it('should have vehicle cards after mounting', async () => {
+    mockCalls()
+    const wrapper = mount(<App />)
+    expect(wrapper.state('vehicles')).toEqual([])
+    const fBtn3 = wrapper.find('.vehiclesBtn')
+
+    fBtn3.simulate('click')
+
+    await wait()
+    const found = wrapper.find('.card')
+    expect(fetchMock.called()).toEqual(true)
+    expect(found.length).toEqual(3)
+  })
+
+  it('should have homeworld data after mounting', async () => {
+    mockCalls()
+    const wrapper = mount(<App />)
+    expect(wrapper.state('homeworld')).toEqual([])
+    const fBtnp = wrapper.find('.planetsBtn')
+
+    fBtnp.simulate('click')
+
+    await wait()
+
+    expect(fetchMock.called()).toEqual(true)
+    expect(wrapper.state('planets')[0]).toHaveProperty('name')
+  })
+
+  it('should have planet cards after mounting', async () => {
+    mockCalls()
+    const wrapper = mount(<App />)
+    expect(wrapper.state('homeworld')).toEqual([])
+    const fBtn3 = wrapper.find('.planetsBtn')
+
+    fBtn3.simulate('click')
+
+    await wait()
+    const found = wrapper.find('.card')
+    expect(fetchMock.called()).toEqual(true)
+    expect(found.length).toEqual(3)
   })
 
 })

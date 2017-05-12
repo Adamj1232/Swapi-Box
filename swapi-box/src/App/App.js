@@ -216,7 +216,7 @@ export default class App extends Component {
 
           <button
             value='vehicles'
-            className={this.whatIsSelected('vehicles')}
+            className={`${this.whatIsSelected('vehicles')} vehiclesBtn`}
             onClick={(e) => {this.fetchVehicles(e)}}
           >Vehicles</button>
 
